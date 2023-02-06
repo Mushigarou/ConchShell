@@ -1,7 +1,12 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <stdio.h>
+# include <dirent.h>
+# include <ttyent.h>
+# include <signal.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
@@ -10,8 +15,12 @@
 # include <limits.h>
 # include <errno.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <sys/types.h>
+# include <sys/ioctl.h>
 # include <math.h>
+# include <termios.h>
+# include <termcap.h>
 
 typedef struct s_list
 {
