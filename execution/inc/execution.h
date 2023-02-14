@@ -1,7 +1,7 @@
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-# include "../libtool/inc/libft.h"
+# include"../../libtool/inc/libft.h"
 
 # define HEREDOC 1
 # define CMD 2
@@ -10,5 +10,6 @@
 # define TRNC 5
 # define INPT 6
 # define FLG 7
+# define ENV 8
 
 #endif

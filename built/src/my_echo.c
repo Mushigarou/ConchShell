@@ -1,4 +1,4 @@
-#include"../inc/execution.h"
+#include"../inc/built.h"
 
 void	where_to_write(char **av, int i, int *fd)
 {
@@ -28,7 +28,8 @@ int	main(int ac, char **av)
 				break ;
 			where_to_write(av, i, &fd);
 			if (fd < 0)
-				return (perror("MINISHELL: "), errno);
+				return (ft_printf("echo: %s: %s\n", 2, strerror(errno),
+						av[i + 2]), errno);
 			write(fd, av[i], ft_strlen(av[i]));
 			if (av[i + 1])
 				write(fd, " ", 1);

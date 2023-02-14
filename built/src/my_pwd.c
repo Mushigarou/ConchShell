@@ -1,4 +1,4 @@
-#include"../inc/execution.h"
+#include"../inc/built.h"
 
 int	main(void)
 {
@@ -7,5 +7,5 @@ int	main(void)
 	if (getcwd(cd, sizeof(cd)))
 		printf("%s\n", cd);
 	else
-		perror("MINI_SHELL:");
+		return (ft_printf("PWD: %s\n", 2, strerror(errno)), errno);
 }
