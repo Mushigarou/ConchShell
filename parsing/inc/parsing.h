@@ -11,7 +11,10 @@
 # define TRNC 5
 # define INPT 6
 # define FLG 7
-# define ENV 8
+# define VRB 8
+# define PP 9
+# define LM 10
+# define ARG 11
 
 /*Store the environment*/
 t_list	*take_env(char **en);
