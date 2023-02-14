@@ -24,10 +24,9 @@
 
 typedef struct s_list
 {
-	long			content;
-	int				idx;
-	int				st;
-	int				st_cnt;
+	char			*pt;
+	int				wt;
+	int				acs;
 	struct s_list	*next;
 }	t_list;
 
@@ -65,15 +64,15 @@ void	ft_putendl_fd(char *s, int fd);
 int		ft_putnbr_fd(int n, int fd);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-t_list	*ft_lstnew(long content, int idx);
+t_list	*ft_lstnew(char *wrd, int tp);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst);
 void	ft_lstclear(t_list **lst);
-void	ft_lstiter(t_list *lst, void (*f)(int));
-t_list	*ft_lstmap(t_list *lst, int (*f)(int));
+void	ft_lstiter(t_list *lst, void (*f)(char *));
+t_list	*ft_lstmap(t_list *lst, char *(*f)(char *));
 int		ft_printf(const char *s, ...);
 int		ft_put_hex(unsigned long n, char frm);
 int		tol(long int nb, int base);
