@@ -1,6 +1,6 @@
 #include"../inc/execution.h"
 
-int	main()
+int	main(void)
 {
 	char	cd[PATH_MAX];
 
