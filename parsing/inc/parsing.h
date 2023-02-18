@@ -15,8 +15,21 @@
 # define PP 9
 # define LM 10
 # define ARG 11
+# define WRD 12
+# define QTS 12
+# define ENV 13
 
 /*Store the environment*/
 t_list	*take_env(char **en);
+/*checking if quotes are valide*/
+int		valid_ct(char *cl);
+/*take qoutes*/
+void	take_quotes(t_minishell *mini, t_list **cmd, int *i);
+/*take dollar*/
+char	*take_dollar(t_minishell *mini, int *i);
+/*check if you should try expand Dollar $*/
+int		check_expand(char *str);
+/*try expand the variable*/
+char	*expan_variable(char *var, t_minishell *mini);
 
 #endif
