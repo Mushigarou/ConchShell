@@ -1,5 +1,26 @@
 #include"../inc/parsing.h"
 
+int	in_quotes(char *line, int i)
+{
+	int	j;
+	int	in;
+
+	j = -1;
+	in = 0;
+	while (line[++j])
+	{
+		if (line[j] == '\'' || line[j] == '"')
+		{
+			if (!in)
+				in = 1;
+			else
+				in = 0;
+		}
+		if (j == i)
+			return (in);
+	}
+}
+
 int	valid_ct(char *cl)
 {
 	int	i;
