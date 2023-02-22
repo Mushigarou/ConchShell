@@ -68,7 +68,7 @@ char	*take_double_qts(t_minishell *mini, int i)
 		}
 		r = ft_strjoin(r, ft_substr(mini->line, x, j - x));
 		if (mini->line[j] == '$')
-			r = ft_strjoin(r, take_dollar(mini, &j));
+			r = ft_strjoin(r, take_dollar(mini, mini->line, &j));
 		if (mini->line[j] == '"')
 			break ;
 	}

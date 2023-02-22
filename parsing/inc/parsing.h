@@ -36,7 +36,7 @@ int		take_quotes(t_minishell *mini, t_list **cmd, int i);
 char	*take_double_qts(t_minishell *mini, int i);
 /*take Dollar*/
 int		take_var(t_minishell *mini, int i);
-char	*take_dollar(t_minishell *mini, int *i);
+char	*take_dollar(t_minishell *mini, char *line, int *i);
 int		check_expand(char *str);
 char	*expan_variable(char *var, t_minishell *mini);
 /*take rediraction*/
