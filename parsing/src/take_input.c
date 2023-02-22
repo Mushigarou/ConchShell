@@ -5,7 +5,7 @@ char	*take_lemiter(t_minishell *mini, int *i)
 	char	*lim;
 	int		j;
 
-	skip_white_spaces(mini, i);
+	*i = skip_white_spaces(mini, *i);
 	j = *i;
 	if (mini->line[*i] == '\'' || mini->line[*i] == '"')
 	{
@@ -32,12 +32,16 @@ void	take_heredoc(t_minishell *mini, t_list **cmd, int *i)
 	char	*lim;
 	char	*line;
 
-	lim = take_delemiter(mini, i);
+	lim = take_lemiter(mini, i);
 	while (1)
 	{
 		line = readline("[HEREDOC]> ");
 		if (!line || !ft_strncmp(line, lim, ft_strlen(lim)))
+		{
+			if (line)
+				free(line);
 			break ;
+		}
 		herdoc = ft_strjoin(herdoc, line);
 		free(line);
 	}
@@ -46,19 +50,19 @@ void	take_heredoc(t_minishell *mini, t_list **cmd, int *i)
 	free(herdoc);
 }
 
-void	take_input_fl(t_minishell *mini, t_list **cmd, int *i)
+int	take_input_fl(t_minishell *mini, t_list **cmd, int i)
 {
 	int		j;
 	char	*fl;
 
-	skip_white_spaces(mini, i);
-	j = *i;
-	if (mini->line[*i] == '\'' || mini->line[*i] == '"')
+	i = skip_white_spaces(mini, i);
+	j = i;
+	if (mini->line[i] == '\'' || mini->line[i] == '"')
 	{
 		while (mini->line[++j])
 			if (mini->line[j] == '\'' || mini->line[j] == '"')
 				break ;
-		fl = ft_substr(mini->line, *i, j - *i);
+		fl = ft_substr(mini->line, i, j - i);
 		j++;
 	}
 	else
@@ -66,23 +70,24 @@ void	take_input_fl(t_minishell *mini, t_list **cmd, int *i)
 		while (mini->line[++j])
 			if (ft_isspace(mini->line[j]))
 				break ;
-		fl = ft_substr(mini->line, *i, j - *i - 1);
+		fl = ft_substr(mini->line, i, j - i);
 	}
-	*i = j;
 	ft_lstadd_back(cmd, ft_lstnew(fl, INPT));
 	free(fl);
+	return (j);
 }
 
-void	take_input(t_minishell *mini, t_list **cmd, int *i)
+int	take_input(t_minishell *mini, t_list **cmd, int i)
 {
-	if (mini->line[*i + 1] == '<')
+	if (mini->line[i + 1] == '<')
 	{
-		*i += 2;
-		take_heredoc(mini, cmd, i);
+		i += 2;
+		take_heredoc(mini, cmd, &i);
 	}
 	else
 	{
-		*i++;
-		take_input_fl(mini, cmd, i);
+		i += 1;
+		i = take_input_fl(mini, cmd, i);
 	}
+	return (i);
 }

@@ -1,11 +1,10 @@
 #include"../inc/parsing.h"
 
-void	take_redirection(t_minishell *mini, t_list **cmd, int *i)
+int	take_rediraction(t_minishell *mini, t_list **cmd, int i)
 {
-	int	tp;
-
-	if (mini->line[*i] == '<')
-		take_input(mini, cmd, i);
+	if (mini->line[i] == '<')
+		i = take_input(mini, cmd, i);
 	else
-		take_output(mini, cmd, i);
+		i = take_output(mini, cmd, i);
+	return (i);
 }

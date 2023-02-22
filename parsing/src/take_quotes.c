@@ -17,8 +17,9 @@ int	in_quotes(char *line, int i)
 				in = 0;
 		}
 		if (j == i)
-			return (in);
+			break ;
 	}
+	return (in);
 }
 
 int	valid_ct(char *cl)
@@ -30,15 +31,19 @@ int	valid_ct(char *cl)
 	i = -1;
 	while (cl[++i])
 	{
-		if (cl[i] == 34 || cl[i] == 39)
+		j = 1;
+		if (cl[i] == '\'' || cl[i] == '"')
 		{
 			ct = cl[i];
-			j = i;
-			while (cl[++j])
-				if (cl[j] == ct)
+			while (cl[i + j])
+			{
+				if (cl[i + j] == ct)
 					break ;
-			if (cl[j] == '\0')
+				j++;
+			}
+			if (cl[i + j] == '\0')
 				return (0);
+			i += j + 1;
 		}
 	}
 	return (1);
@@ -47,38 +52,48 @@ int	valid_ct(char *cl)
 char	*take_double_qts(t_minishell *mini, int i)
 {
 	int		j;
+	int		x;
 	char	*r;
 
-	j = i;
-	while (mini->line[++j] != '"')
+	j = i + 1;
+	r = NULL;
+	while (1)
 	{
+		x = j;
+		while (mini->line[j])
+		{
+			if (mini->line[j] == '$' || mini->line[j] == '"')
+				break ;
+			j++;
+		}
+		r = ft_strjoin(r, ft_substr(mini->line, x, j - x));
 		if (mini->line[j] == '$')
 			r = ft_strjoin(r, take_dollar(mini, &j));
-		else
-			r = ft_strjoin(r, take_wrd(mini, &j));
+		if (mini->line[j] == '"')
+			break ;
 	}
 	return (r);
 }
 
-void	take_quotes(t_minishell *mini, t_list **cmd, int *i)
+int	take_quotes(t_minishell *mini, t_list **cmd, int i)
 {
 	int		j;
 	char	*pt;
 
-	j = *i;
+	j = i;
 	while (mini->line[++j])
-		if (mini->line[*i] == mini->line[j])
+		if (mini->line[i] == mini->line[j])
 			break ;
-	if (j == *i + 1)
+	if (j == i + 1)
 	{
 		ft_lstadd_back(cmd, ft_lstnew("", QTS));
-		return ;
+		return (j);
 	}
-	else if (mini->line[*i] == '\'')
-		pt = ft_substr(mini->line, *i, j - *i);
-	else if (mini->line[*i] == '"')
-		pt = take_double_qts(mini, *i);
-	*i = j;
+	else if (mini->line[i] == '\'')
+		pt = ft_substr(mini->line, i, j - i + 1);
+	else if (mini->line[i] == '"')
+		pt = take_double_qts(mini, i);
 	ft_lstadd_back(cmd, ft_lstnew(pt, QTS));
 	free(pt);
+	return (j + 1);
 }

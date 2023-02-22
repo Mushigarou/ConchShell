@@ -7,6 +7,6 @@ t_list	*take_env(char **en)
 
 	i = -1;
 	while (en[++i])
-		ft_lstadd_back(&env, ft_lstnew(en[i], ENV));
+		ft_lstadd_back(&env, ft_lstnew(en[i], EN));
 	return (env);
 }
