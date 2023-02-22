@@ -22,7 +22,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		while (s2[++j])
 			d[i + j] = s2[j];
 		d[i + j] = '\0';
-		return (d);
+		return (free(s1), free(s2), d);
 	}
 	return (NULL);
 }

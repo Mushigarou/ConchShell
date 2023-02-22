@@ -23,6 +23,14 @@
 # include <termcap.h>
 # include <errno.h>
 
+typedef struct s_list
+{
+	char			*pt;
+	int				wt;
+	int				acs;
+	struct s_list	*next;
+}	t_list;
+
 typedef struct s_minishell
 {
 	int		ext_st;
@@ -39,14 +47,6 @@ typedef struct s_cmd
 	int		in_f;
 	int		out_f;
 }	t_cmd;
-
-typedef struct s_list
-{
-	char			*pt;
-	int				wt;
-	int				acs;
-	struct s_list	*next;
-}	t_list;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
