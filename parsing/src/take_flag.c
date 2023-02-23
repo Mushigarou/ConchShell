@@ -6,6 +6,8 @@ int	take_flag(t_minishell *mini, t_list **cmd, int i)
 	int		j;
 
 	j = i + 1;
+	if (mini->line[j] == '-')
+		j++;
 	while (mini->line[j])
 	{
 		if (ft_isspace(mini->line[j]) || (!ft_isalnum(mini->line[j])
