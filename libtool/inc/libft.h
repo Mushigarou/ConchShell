@@ -42,10 +42,11 @@ typedef struct s_minishell
 
 typedef struct s_cmd
 {
-	char	**cmd;
-	char	*pth;
-	int		in_f;
-	int		out_f;
+	char			**cmd;
+	char			*pth;
+	int				in_f;
+	int				out_f;
+	struct s_cmd	*nxt;
 }	t_cmd;
 
 int		ft_isalpha(int c);

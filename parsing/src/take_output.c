@@ -12,7 +12,7 @@ int	take_outfile(t_minishell *mini, t_list **cmd, int i, int tp)
 		while (mini->line[++j])
 			if (mini->line[j] == '\'' || mini->line[j] == '"')
 				break ;
-		fl = ft_substr(mini->line, i, j - i);
+		fl = ft_substr(mini->line, i + 1, j - i - 1);
 		j++;
 	}
 	else
