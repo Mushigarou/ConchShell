@@ -17,13 +17,13 @@ int	empty_line(char *line)
 int	check_syntax(char *line)
 {
 	if (empty_line(line))
-		return (0);
+		return (-1);
 	else if (!valid_ct(line))
-		return (printf("quotes\n"), 256);
+		return (258);
 	else if (!valid_rediraction(line))
-		return (printf("redirection\n"), 256);
+		return (258);
 	else if (!valid_pipe(line))
-		return (printf("pipe\n"), 256);
+		return (258);
 	else
-		return (1);
+		return (0);
 }

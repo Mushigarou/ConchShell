@@ -90,9 +90,9 @@ int	take_input_fl(t_minishell *mini, t_list **cmd, int i)
 	if (mini->line[i] == '\'' || mini->line[i] == '"')
 	{
 		while (mini->line[++j])
-			if (mini->line[j] == '\'' || mini->line[j] == '"')
+			if (mini->line[j] == mini->line[i])
 				break ;
-		fl = ft_substr(mini->line, i, j - i);
+		fl = ft_substr(mini->line, i + 1, j - i - 1);
 		j++;
 	}
 	else
