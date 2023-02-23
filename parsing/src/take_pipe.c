@@ -23,9 +23,9 @@ int	valid_pipe(char *line)
 	return (1);
 }
 
-int	take_pipe(t_minishell *mini, t_list **cmd, int i)
+int	take_pipe(t_minishell *mini, int i)
 {
-	ft_lstadd_back(cmd, ft_lstnew("|", PP));
+	ft_lstadd_back(&mini->cmd, ft_lstnew("|", PP));
 	i += 1;
 	return (i);
 }

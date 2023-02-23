@@ -78,6 +78,7 @@ int	take_quotes(t_minishell *mini, t_list **cmd, int i)
 	char	*pt;
 
 	j = i;
+	pt = NULL;
 	while (mini->line[++j])
 		if (mini->line[i] == mini->line[j])
 			break ;
