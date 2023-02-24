@@ -10,6 +10,8 @@ S_F = check_redirection.c\
 		take_quotes.c\
 		take_redirction.c\
 		take_word.c\
+		split_by_pp_and_rdrct.c\
+		split_by_space.c\
 
 S_D = src
 

@@ -7,9 +7,9 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*d;
 
 	if (!s1 && s2)
-		return (s2);
+		return (d = ft_strdup(s2), free(s2), d);
 	if (!s2 && s1)
-		return (s1);
+		return (d = ft_strdup(s1), free(s1), d);
 	if (s1 && s2)
 	{
 		i = -1;
