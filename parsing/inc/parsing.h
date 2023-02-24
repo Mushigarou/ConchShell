@@ -42,7 +42,7 @@ int		take_rediraction(t_minishell *mini, t_list **cmd, int i);
 int		take_input(t_minishell *mini, t_list **cmd, int i);
 int		take_input_fl(t_minishell *mini, t_list **cmd, int i);
 void	take_heredoc(t_minishell *mini, t_list **cmd, int *i);
-char	*take_lemiter(t_minishell *mini, int *i);
+char	*take_lemiter(t_minishell *mini, int *i, int *exp_ch);
 int		take_output(t_minishell *mini, t_list **cmd, int i);
 int		take_outfile(t_minishell *mini, t_list **cmd, int i, int tp);
 /*take pipe*/

@@ -48,4 +48,4 @@ re: fclean all
 
 .PHONY: all clean fclean re
 
-.SILENT: all clean fclean re $(NAME) $(O_D)
+.SILENT: all clean fclean re $(NAME) $(O_D) start
