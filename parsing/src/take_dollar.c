@@ -18,7 +18,7 @@ char	*expan_variable(char *var, t_minishell *mini)
 			break ;
 		i++;
 	}
-	vr = ft_substr(var, 1, i - 1);
+	vr = ft_strjoin(ft_substr(var, 1, i - 1), ft_strdup("="));
 	while (tmp)
 	{
 		if (tmp->acs)

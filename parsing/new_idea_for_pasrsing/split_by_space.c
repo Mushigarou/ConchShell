@@ -46,7 +46,7 @@ void	expander(t_minishell *mini)
 	tmp = mini->cmd;
 	while (tmp)
 	{
-		if (check_for_expander(tmp->pt))
+		if (check_for_expander(tmp->pt) && tmp->wt == LMTR)
 			tmp->pt = expand_var(mini, tmp->pt);
 		tmp = tmp->next;
 	}

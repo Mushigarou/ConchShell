@@ -12,6 +12,7 @@ S_F = check_redirection.c\
 		take_word.c\
 		split_by_pp_and_rdrct.c\
 		split_by_space.c\
+		lexer.c\
 
 S_D = src
 
