@@ -85,7 +85,7 @@ int	valid_pipe(char *line)
 int	check_syntax(char *line)
 {
 	if (empty_line(line))
-		return (-1);
+		return (0);
 	else if (!valid_ct(line))
 		return (258);
 	else if (!valid_rediraction(line))

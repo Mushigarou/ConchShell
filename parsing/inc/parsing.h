@@ -23,20 +23,29 @@
 
 /*check synstax*/
 int		check_syntax(char *line);
+/*check if the line is empty*/
 int		empty_line(char *line);
+/*check if the pipes are valid*/
 int		valid_pipe(char *line);
+/*check if the redirections is valid*/
 int		valid_rediraction(char *line);
+/*check if the output file is valid*/
 int		check_output(char *line, int i);
+/*check if the input file is valid*/
 int		check_input(char *line, int i);
+/*check if the herdoc is valid*/
 int		check_heredoc(char *line, int i);
+/*check if the character is inside the quotes or outside*/
 int		in_quotes(char *line, int i);
+/*check if the quotes are valid*/
 int		valid_ct(char *cl);
 /*Store the environment*/
 t_list	*take_env(char **en);
-/*take Dollar*/
-int		take_var(t_minishell *mini, int i);
+/*take Dollar signe*/
 char	*take_dollar(t_minishell *mini, char *line, int *i);
+/*check if the dollar signe should be expanded or nitt*/
 int		check_expand(char *str);
+/*try expan the dolar signe*/
 char	*expan_variable(char *var, t_minishell *mini);
 /*skiping white spaces*/
 int		skip_white_spaces(t_minishell *mini, int i);

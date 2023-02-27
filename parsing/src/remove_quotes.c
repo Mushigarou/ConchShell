@@ -73,7 +73,11 @@ void	remove_quotes(t_minishell *mini)
 	while (tmp)
 	{
 		if (ft_strchr(tmp->pt, '\'') || ft_strchr(tmp->pt, '"'))
+		{
 			tmp->pt = take_new_str(mini, tmp);
+			if (tmp->wt == LMTR)
+				tmp->acs == 0;
+		}
 		tmp = tmp->next;
 	}
 }

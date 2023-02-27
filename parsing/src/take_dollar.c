@@ -63,13 +63,3 @@ char	*take_dollar(t_minishell *mini, char *line, int *i)
 	}
 	return (exp);
 }
-
-int	take_var(t_minishell *mini, int i)
-{
-	char	*var;
-
-	var = take_dollar(mini, mini->line, &i);
-	ft_lstadd_back(&mini->cmd, ft_lstnew(var, VRB));
-	free(var);
-	return (i);
-}
