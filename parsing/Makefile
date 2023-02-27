@@ -5,6 +5,7 @@ S_F = check_redirection.c\
 		split_by_pp_and_rdrct.c\
 		split_by_space.c\
 		lexer.c\
+		remove_quotes.c\
 
 S_D = src
 

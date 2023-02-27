@@ -66,5 +66,7 @@ void	identify_cmd(t_minishell *mini);
 void	identify_flag(t_minishell *mini);
 /*locate command's arguments*/
 void	identify_arg(t_minishell *mini);
+/*remove the qouts and expand if needed*/
+void	remove_quotes(t_minishell *mini);
 
 #endif
