@@ -76,7 +76,7 @@ void	remove_quotes(t_minishell *mini)
 		{
 			tmp->pt = take_new_str(mini, tmp);
 			if (tmp->wt == LMTR)
-				tmp->acs == 0;
+				tmp->acs = 0;
 		}
 		tmp = tmp->next;
 	}
