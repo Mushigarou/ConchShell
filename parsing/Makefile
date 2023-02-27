@@ -1,15 +1,7 @@
 S_F = check_redirection.c\
 		check_syntax.c\
-		parss_cmd_ln.c\
 		take_dollar.c\
 		take_env.c\
-		take_flag.c\
-		take_input.c\
-		take_output.c\
-		take_pipe.c\
-		take_quotes.c\
-		take_redirction.c\
-		take_word.c\
 		split_by_pp_and_rdrct.c\
 		split_by_space.c\
 		lexer.c\

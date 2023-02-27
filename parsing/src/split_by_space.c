@@ -1,5 +1,16 @@
 #include"../inc/parsing.h"
 
+int	skip_white_spaces(t_minishell *mini, int i)
+{
+	while (mini->line[i])
+	{
+		if (!ft_isspace(mini->line[i]))
+			break ;
+		i++;
+	}
+	return (i);
+}
+
 int	check_for_expander(t_list *prt)
 {
 	int	i;

@@ -1,5 +1,26 @@
 #include"../inc/parsing.h"
 
+void	identify_special_charcters(t_minishell *mini)
+{
+	t_list	*tmp;
+
+	tmp = mini->cmd;
+	while (tmp)
+	{
+		if (!ft_strncmp(tmp->pt, "<<", 3))
+			tmp->wt = HEREDOC;
+		else if (!ft_strncmp(tmp->pt, "<", 2))
+			tmp->wt = INPT;
+		else if (!ft_strncmp(tmp->pt, ">>", 3))
+			tmp->wt = APND;
+		else if (!ft_strncmp(tmp->pt, ">", 2))
+			tmp->wt = TRNC;
+		else if (!ft_strncmp(tmp->pt, "|", 2))
+			tmp->wt = PP;
+		tmp = tmp->next;
+	}
+}
+
 void	incriment_shell_lvl(t_list **env)
 {
 	t_list	*tmp;

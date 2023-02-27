@@ -1,26 +1,5 @@
 #include"../inc/parsing.h"
 
-void	identify_special_charcters(t_minishell *mini)
-{
-	t_list	*tmp;
-
-	tmp = mini->cmd;
-	while (tmp)
-	{
-		if (!ft_strncmp(tmp->pt, "<<", 3))
-			tmp->wt = HEREDOC;
-		else if (!ft_strncmp(tmp->pt, "<", 2))
-			tmp->wt = INPT;
-		else if (!ft_strncmp(tmp->pt, ">>", 3))
-			tmp->wt = APND;
-		else if (!ft_strncmp(tmp->pt, ">", 2))
-			tmp->wt = TRNC;
-		else if (!ft_strncmp(tmp->pt, "|", 2))
-			tmp->wt = PP;
-		tmp = tmp->next;
-	}
-}
-
 void	identify_rdrct(t_minishell *mini)
 {
 	t_list	*tmp;
@@ -63,6 +42,35 @@ void	identify_cmd(t_minishell *mini)
 	{
 		if (is_rdrct_or_pp(tmp->wt) && (tmp->next && tmp->next->wt == IND))
 			tmp->next->wt = CMD;
+		tmp = tmp->next;
+	}
+}
+
+void	identify_flag(t_minishell *mini)
+{
+	t_list	*tmp;
+
+	tmp = mini->cmd;
+	while (tmp)
+	{
+		if ((tmp->wt == CMD || tmp->wt == FLG) && (tmp->next
+				&& tmp->next->wt == IND))
+			if (!ft_strncmp(tmp->next->pt, "-", 1))
+				tmp->next->wt = FLG;
+		tmp = tmp->next;
+	}
+}
+
+void	identify_arg(t_minishell *mini)
+{
+	t_list	*tmp;
+
+	tmp = mini->cmd;
+	while (tmp)
+	{
+		if ((tmp->wt == CMD || tmp->wt == FLG || tmp->wt == ARG)
+			&& (tmp->next && tmp->next->wt == IND))
+			tmp->next->wt = ARG;
 		tmp = tmp->next;
 	}
 }
