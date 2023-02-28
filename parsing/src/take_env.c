@@ -34,7 +34,29 @@ void	incriment_shell_lvl(t_list **env)
 			lvl = ft_strjoin(ft_strdup("SHLVL="),
 					ft_itoa(ft_atoi(tmp->pt + 6) + 1));
 			free(tmp->pt);
-			tmp->pt = lvl;
+			tmp->pt = ft_strdup(lvl);
+			free(lvl);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+}
+
+void	change_shell(t_list **env)
+{
+	t_list	*tmp;
+	char	*shl;
+
+	tmp = *env;
+	while (tmp)
+	{
+		if (ft_strnstr(tmp->pt, "SHELL=", ft_strlen(tmp->pt)))
+		{
+			shl = ft_strjoin(ft_strdup("SHELL="),
+					ft_strdup("/Users/faksouss/Desktop/mini_shell"));
+			free(tmp->pt);
+			tmp->pt = ft_strdup(shl);
+			free(shl);
 			return ;
 		}
 		tmp = tmp->next;
@@ -51,6 +73,7 @@ t_list	*take_env(char **en)
 	while (en[++i])
 		ft_lstadd_back(&env, ft_lstnew(en[i], EN));
 	incriment_shell_lvl(&env);
+	change_shell(&env);
 	tmp = env;
 	return (env);
 }
