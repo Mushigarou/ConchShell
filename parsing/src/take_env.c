@@ -66,14 +66,13 @@ void	change_shell(t_list **env)
 t_list	*take_env(char **en)
 {
 	t_list	*env;
-	t_list	*tmp;
 	int		i;
 
 	i = -1;
+	env = NULL;
 	while (en[++i])
 		ft_lstadd_back(&env, ft_lstnew(en[i], EN));
 	incriment_shell_lvl(&env);
 	change_shell(&env);
-	tmp = env;
 	return (env);
 }
