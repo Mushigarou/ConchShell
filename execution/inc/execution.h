@@ -62,5 +62,7 @@ int		error(char *er);
 /*this function is used to in case of the command not found it print the error 
 and deallocate the envirenment and the command and exit the process*/
 void	cmd_not_found(char **en, char **cm);
+/*execute command line with multipel pipes*/
+void	execute_mltpl_cmd(t_list **cmd, t_minishell *mini);
 
 #endif
