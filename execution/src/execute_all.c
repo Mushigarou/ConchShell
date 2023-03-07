@@ -1,19 +1,5 @@
 #include"../inc/execution.h"
 
-int	error(char *er)
-{
-	ft_printf("MiniShell : %s : %s\n", STDERR_FILENO, strerror(errno), er);
-	return (errno);
-}
-
-void	cmd_not_found(char **en, char **cm)
-{
-	ft_printf("Minishell : command not found : %s\n", STDERR_FILENO, cm[0]);
-	deallocate(en);
-	deallocate(cm);
-	exit(127);
-}
-
 void	do_single_cmd(t_list *cmd, t_minishell *mini)
 {
 	char	**en;
@@ -52,8 +38,47 @@ void	execute_one(t_list *cmd, t_minishell *mini)
 		waitpid(pid, &mini->ext_st, 0);
 }
 
+void	execute_mltpl_cmd(t_list **cmd, t_minishell *mini)
+{
+	int	i;
+	int	pid;
+
+	i = -1;
+	while (cmd[++i])
+	{
+		if (pipe(mini->fd) < 0)
+			exit(error("pipe"));
+		pid = fork();
+		if (!pid)
+		{
+			close(mini->fd[0]);
+			if (cmd[i + 1])
+				dup2(mini->fd[1], STDOUT_FILENO);
+			do_single_cmd(cmd[i], mini);
+		}
+		else
+		{
+			close(mini->fd[1]);
+			if (cmd[i + 1])
+				dup2(mini->fd[0], STDIN_FILENO);
+			waitpid(pid, &mini->ext_st, 0);
+		}
+	}
+	exit(mini->ext_st);
+}
+
 void	execute_all(t_list **cmd, int ct, t_minishell *mini)
 {
+	int	pid;
+
 	if (ct == 1)
 		execute_one(cmd[0], mini);
+	else
+	{
+		pid = fork();
+		if (!pid)
+			execute_mltpl_cmd(cmd, mini);
+		else
+			waitpid(pid, &mini->ext_st, 0);
+	}
 }

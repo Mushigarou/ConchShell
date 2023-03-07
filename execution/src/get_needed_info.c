@@ -1,5 +1,19 @@
 #include"../inc/execution.h"
 
+int	error(char *er)
+{
+	ft_printf("MiniShell : %s : %s\n", STDERR_FILENO, strerror(errno), er);
+	return (errno);
+}
+
+void	cmd_not_found(char **en, char **cm)
+{
+	ft_printf("Minishell : command not found : %s\n", STDERR_FILENO, cm[0]);
+	deallocate(en);
+	deallocate(cm);
+	exit(127);
+}
+
 int	how_many_pipe(t_list *cmd)
 {
 	t_list	*tmp;
