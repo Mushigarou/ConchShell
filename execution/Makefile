@@ -1,8 +1,11 @@
 S_F = convert_env_list_to_char.c\
-		take_cmd_by_cmd.c\
+		execute_all.c\
 		get_needed_info.c\
-		# convert_cmd_to_char.c\
-		# exc_cmd_lst.c\
+		take_cmd_and_prts.c\
+		take_cmd_by_cmd.c\
+		take_cmd_path.c\
+		take_in_rdrct.c\
+		take_out_rdrct.c\
 
 S_D = src
 

@@ -80,7 +80,7 @@ void	take_cmd(t_minishell *mini)
 void	take_and_do_cmd(t_minishell *mini)
 {
 	take_cmd(mini);
-	do_cmd(mini);
+	split_and_execute_cmd(mini);
 	// execute_cmd_line(mini);
 	ft_lstclear(&mini->cmd);
 }
