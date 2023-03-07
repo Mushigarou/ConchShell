@@ -17,7 +17,7 @@ char	*inisialise_prompt(void)
 	int			i;
 
 	i = 0;
-	if (getcwd(cd, PATH_MAX) < 0)
+	if (!getcwd(cd, PATH_MAX))
 		return (r);
 	else
 	{

@@ -5,10 +5,8 @@ char	*expan_variable(char *var, t_minishell *mini)
 	t_list	*tmp;
 	char	*vr;
 	int		i;
-	int		ct;
 
 	i = 1;
-	ct = 0;
 	tmp = mini->env;
 	if (var[i] == '?')
 		return (ft_itoa(mini->ext_st / 255));
@@ -40,9 +38,7 @@ int	check_expand(char *str)
 char	*take_dollar(t_minishell *mini, char *line, int *i)
 {
 	char	*exp;
-	int		j;
 
-	j = 0;
 	exp = NULL;
 	if (check_expand(&line[*i]))
 	{
