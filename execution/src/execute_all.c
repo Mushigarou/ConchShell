@@ -69,6 +69,7 @@ void	execute_mltpl_cmd(t_list **cmd, t_minishell *mini)
 void	execute_all(t_list **cmd, int ct, t_minishell *mini)
 {
 	int	pid;
+	int	i;
 
 	if (ct == 1)
 		execute_one(cmd[0], mini);
@@ -80,4 +81,8 @@ void	execute_all(t_list **cmd, int ct, t_minishell *mini)
 		else
 			waitpid(pid, &mini->ext_st, 0);
 	}
+	i = -1;
+	while (cmd[++i])
+		ft_lstclear(&cmd[i]);
+	free(cmd);
 }

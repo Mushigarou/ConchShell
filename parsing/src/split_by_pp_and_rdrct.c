@@ -63,6 +63,7 @@ void	add_to_new_list(t_list **new, char *str)
 	{
 		s = i;
 		i = jst_for_norminnet(str, i);
+		prt = NULL;
 		if (i > s)
 		{
 			prt = ft_substr(str, s, i - s);

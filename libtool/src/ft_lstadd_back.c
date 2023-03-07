@@ -9,8 +9,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		if (*lst)
 		{
 			cr = ft_lstlast(*lst);
-			if (!cr)
-				return ;
 			cr->next = new;
 		}
 		else

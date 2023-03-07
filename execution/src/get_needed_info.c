@@ -44,8 +44,4 @@ void	split_and_execute_cmd(t_minishell *mini)
 	while (++j <= i)
 		cmd[j] = single_cmd(mini);
 	execute_all(cmd, i, mini);
-	j = -1;
-	while (++j < i)
-		ft_lstclear(&cmd[j]);
-	free(cmd);
 }
