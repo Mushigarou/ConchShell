@@ -55,6 +55,7 @@ void	take_input(t_list *cmd, t_minishell *mini)
 	t_list	*tmp;
 
 	tmp = cmd;
+	fd = -1;
 	while (tmp)
 	{
 		if (tmp->wt == INPT)
@@ -63,5 +64,6 @@ void	take_input(t_list *cmd, t_minishell *mini)
 			open_heredoc(tmp->next, mini, &fd);
 		tmp = tmp->next;
 	}
-	dup2(fd, STDIN_FILENO);
+	if (fd > 0)
+		dup2(fd, STDIN_FILENO);
 }

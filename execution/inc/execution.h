@@ -3,6 +3,7 @@
 
 # include"../../libtool/inc/libft.h"
 # include"../../parsing/inc/parsing.h"
+# include"../../built/inc/built.h"
 
 /*calculate the len of the accessable parts of envirement*/
 int		env_len(t_list *en);
@@ -60,8 +61,8 @@ void	do_single_cmd(t_list *cmd, t_minishell *mini);
 /*print the error and return the errno macro this function is used inside exit*/
 int		error(char *er);
 /*this function is used to in case of the command not found it print the error 
-and deallocate the envirenment and the command and exit the process*/
-void	cmd_not_found(char **en, char **cm);
+and deallocate the command and exit the process*/
+void	cmd_not_found(char **cm);
 /*execute command line with multipel pipes*/
 void	execute_mltpl_cmd(t_list **cmd, t_minishell *mini);
 

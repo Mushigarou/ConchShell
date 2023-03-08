@@ -30,11 +30,13 @@ void	take_output(t_list *cmd)
 	t_list	*tmp;
 
 	tmp = cmd;
+	fd = -1;
 	while (tmp)
 	{
 		if (tmp->wt == APND || tmp->wt == TRNC)
 			open_output(tmp->next, &fd);
 		tmp = tmp->next;
 	}
-	dup2(fd, STDOUT_FILENO);
+	if (fd > 0)
+		dup2(fd, STDOUT_FILENO);
 }

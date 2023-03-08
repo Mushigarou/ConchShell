@@ -6,10 +6,9 @@ int	error(char *er)
 	return (errno);
 }
 
-void	cmd_not_found(char **en, char **cm)
+void	cmd_not_found(char **cm)
 {
 	ft_printf("Minishell : command not found : %s\n", STDERR_FILENO, cm[0]);
-	deallocate(en);
 	deallocate(cm);
 	exit(127);
 }
