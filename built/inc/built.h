@@ -16,7 +16,7 @@ void	do_builtin(t_list *cmd, t_minishell *mini);
 /*check if the flag -n chould work*/
 int		check_echo_flg(char *flg);
 /*repreduce the echo bihavior*/
-void	my_echo(t_list *cmd, t_minishell *mini);
+void	my_echo(t_list *cmd);
 /*check if the command is echo*/
 int		is_echo(t_list *cmd);
 /*repreduce the cd bihavior*/
@@ -29,5 +29,13 @@ void	go_to_path(t_minishell *mini, char *pth);
 void	go_home(t_minishell *mini);
 /*check if the command is cd*/
 int		is_cd(t_list *cmd);
+/*check if the command is pwd*/
+int		is_pwd(t_list *cmd);
+/*repreduce the pwd bihavior*/
+void	my_pwd(t_list *env);
+/*check if the command is env*/
+int		is_env(t_list *cmd);
+/*repreduce the env bihavior*/
+void	my_env(t_list *env);
 
 #endif

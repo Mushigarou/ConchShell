@@ -28,9 +28,11 @@ E_F =   convert_env_list_to_char.c\
 			take_in_rdrct.c\
 			take_out_rdrct.c\
 
-B_F = my_echo.c\
+B_F = check_built.c\
+		my_echo.c\
 		my_cd.c\
-		check_built.c
+		my_pwd.c\
+		my_env.c\
 
 O_D = obj
 

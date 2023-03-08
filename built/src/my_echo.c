@@ -28,13 +28,11 @@ int	check_echo_flg(char *flg)
 		return (0);
 }
 
-void	my_echo(t_list *cmd, t_minishell *mini)
+void	my_echo(t_list *cmd)
 {
 	char	**cm;
 	int		i;
 
-	take_input(cmd, mini);
-	take_output(cmd);
 	cm = take_char_cmd(cmd);
 	if (cm[1] && check_echo_flg(cm[1]))
 		i = 1;

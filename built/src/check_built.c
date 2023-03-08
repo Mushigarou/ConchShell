@@ -29,9 +29,13 @@ int	is_builtin(t_list *cmd)
 void	do_builtin(t_list *cmd, t_minishell *mini)
 {
 	if (is_echo(cmd))
-		my_echo(cmd, mini);
+		my_echo(cmd);
 	else if (is_cd(cmd))
 		my_cd(cmd, mini);
+	else if (is_pwd(cmd))
+		my_pwd(mini->env);
+	else if (is_env(cmd))
+		my_env(mini->env);
 }
 
 int	should_not_fork(t_list *cmd)

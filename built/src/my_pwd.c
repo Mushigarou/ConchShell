@@ -1,11 +1,32 @@
 #include"../inc/built.h"
 
-int	main(void)
+int	is_pwd(t_list *cmd)
 {
-	char	cd[PATH_MAX];
+	t_list	*tmp;
 
-	if (getcwd(cd, sizeof(cd)))
-		printf("%s\n", cd);
-	else
-		return (ft_printf("PWD: %s\n", 2, strerror(errno)), errno);
+	tmp = cmd;
+	while (tmp)
+	{
+		if (tmp->wt == CMD)
+			if (!ft_strncmp(tmp->pt, "pwd", 4))
+				return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+void	my_pwd(t_list *env)
+{
+	t_list	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (!ft_strncmp(tmp->pt, "PWD=", 4))
+		{
+			ft_printf("%s\n", STDOUT_FILENO, tmp->pt + 4);
+			break ;
+		}
+		tmp = tmp->next;
+	}
 }

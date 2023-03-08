@@ -1,10 +1,29 @@
 #include"../inc/built.h"
 
-int	main(int ac, char **av, char **en)
+int	is_env(t_list *cmd)
 {
-	if (ac == 1 && !ft_strncmp((av[0] + 2), "env_f", 6))
+	t_list	*tmp;
+
+	tmp = cmd;
+	while (tmp)
 	{
-		while (*en)
-			printf("%s\n", *en++);
+		if (tmp->wt == CMD)
+			if (!ft_strncmp(tmp->pt, "env", 4))
+				return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+void	my_env(t_list *env)
+{
+	t_list	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (tmp->acs)
+			ft_printf("%s\n", STDOUT_FILENO, tmp->pt);
+		tmp = tmp->next;
 	}
 }
