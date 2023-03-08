@@ -36,6 +36,8 @@ void	do_builtin(t_list *cmd, t_minishell *mini)
 		my_pwd(mini->env);
 	else if (is_env(cmd))
 		my_env(mini->env);
+	else if (is_exit(cmd))
+		my_exit(cmd, mini);
 }
 
 int	should_not_fork(t_list *cmd)

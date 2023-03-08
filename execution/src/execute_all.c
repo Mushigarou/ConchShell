@@ -16,7 +16,7 @@ void	do_single_cmd(t_list *cmd, t_minishell *mini)
 		if (is_builtin(cmd))
 		{
 			do_builtin(cmd, mini);
-			exit(EXIT_SUCCESS);
+			exit(mini->ext_st);
 		}
 		cm = take_char_cmd(cmd);
 		cm_pth = take_path(cm[0], mini);

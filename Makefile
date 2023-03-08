@@ -33,6 +33,7 @@ B_F = check_built.c\
 		my_cd.c\
 		my_pwd.c\
 		my_env.c\
+		my_exit.c\
 
 O_D = obj
 

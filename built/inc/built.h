@@ -37,5 +37,11 @@ void	my_pwd(t_list *env);
 int		is_env(t_list *cmd);
 /*repreduce the env bihavior*/
 void	my_env(t_list *env);
+/*check if the command is exit*/
+int		is_exit(t_list *cmd);
+/*check if the argiment passed to exit is valid*/
+int		valid_arg(char *arg);
+/*repreduce the exit bihavior*/
+void	my_exit(t_list *cmd, t_minishell *mini);
 
 #endif
