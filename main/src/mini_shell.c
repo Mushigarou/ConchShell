@@ -3,7 +3,7 @@
 void	out(t_minishell *mini)
 {
 	ft_lstclear(&mini->env);
-	// free(mini->prompt);
+	free(mini->prompt);
 	// system("leaks minishell");
 	ft_printf("exit\n", 1);
 	exit(mini->ext_st / 255);
@@ -88,7 +88,6 @@ void	mini_shell(t_minishell *mini)
 {
 	mini->prompt = inisialise_prompt();
 	mini->line = readline(mini->prompt);
-	free(mini->prompt);
 	if (!mini->line)
 		out(mini);
 	if (!empty_line(mini->line))

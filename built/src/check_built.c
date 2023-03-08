@@ -42,8 +42,10 @@ int	should_not_fork(t_list *cmd)
 	while (tmp)
 	{
 		if (tmp->wt == CMD)
-			if (!ft_strncmp(tmp->pt, "cd", 3) || !ft_strncmp(tmp->pt, "unset", 6)
-				||	!ft_strncmp(tmp->pt, "export", 3) || !ft_strncmp(tmp->pt, "exit", 5))
+			if (!ft_strncmp(tmp->pt, "cd", 3)
+				|| !ft_strncmp(tmp->pt, "unset", 6)
+				|| !ft_strncmp(tmp->pt, "export", 3)
+				|| !ft_strncmp(tmp->pt, "exit", 5))
 				return (1);
 		tmp = tmp->next;
 	}
