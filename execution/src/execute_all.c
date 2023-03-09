@@ -23,7 +23,7 @@ void	do_single_cmd(t_list *cmd, t_minishell *mini)
 		if (!cm_pth)
 			cmd_not_found(cm);
 		execve(cm_pth, cm, take_char_env(mini->env));
-		exit(error("execve"));
+		exit(error("execve", errno));
 	}
 	exit(EXIT_SUCCESS);
 }
@@ -53,7 +53,7 @@ void	execute_mltpl_cmd(t_list **cmd, t_minishell *mini)
 	while (cmd[++i])
 	{
 		if (pipe(mini->fd) < 0)
-			exit(error("pipe"));
+			exit(error("pipe", errno));
 		pid = fork();
 		if (!pid)
 		{

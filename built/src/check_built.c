@@ -38,6 +38,8 @@ void	do_builtin(t_list *cmd, t_minishell *mini)
 		my_env(mini->env);
 	else if (is_exit(cmd))
 		my_exit(cmd, mini);
+	else if (is_unset(cmd))
+		my_unset(cmd, mini);
 }
 
 int	should_not_fork(t_list *cmd)

@@ -9,7 +9,7 @@ char	*expan_variable(char *var, t_minishell *mini)
 	i = 1;
 	tmp = mini->env;
 	if (var[i] == '?')
-		return (ft_itoa(mini->ext_st / 255));
+		return (ft_itoa(mini->ext_st / 256));
 	while (var[i])
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_')

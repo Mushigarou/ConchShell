@@ -23,8 +23,6 @@ int		is_echo(t_list *cmd);
 void	my_cd(t_list *cmd, t_minishell *mini);
 /*update the pwd in the envirenment*/
 void	update_env(t_minishell *mini);
-/*go to a speciphic path*/
-void	go_to_path(t_minishell *mini, char *pth);
 /*if cd is called whith out args go to home path*/
 void	go_home(t_minishell *mini);
 /*check if the command is cd*/
@@ -43,5 +41,16 @@ int		is_exit(t_list *cmd);
 int		valid_arg(char *arg);
 /*repreduce the exit bihavior*/
 void	my_exit(t_list *cmd, t_minishell *mini);
+/*check if the command is unset*/
+int		is_unset(t_list *cmd);
+/*check the unset syntax*/
+int		check_unset_syntax(char *str, int *ext_st);
+/*check if the str is the target to unset*/
+int		is_the_target(char *str, char *env);
+/*look for the target if it existe in the envirement and unset
+it if it find it*/
+void	unset_from_env(char *str, t_minishell *mini);
+/*repreduce the unset bihavior*/
+void	my_unset(t_list *cmd, t_minishell *mini);
 
 #endif

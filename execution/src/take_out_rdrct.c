@@ -21,7 +21,7 @@ void	open_output(t_list *fl, int *fd)
 	else if (fl->wt == AP_F)
 		*fd = open(fl->pt, (O_CREAT | O_APPEND | O_WRONLY), 0777);
 	if (*fd < 0)
-		exit(error(fl->pt));
+		exit(error(fl->pt, 1));
 }
 
 void	take_output(t_list *cmd)
