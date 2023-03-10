@@ -52,5 +52,7 @@ it if it find it*/
 void	unset_from_env(char *str, t_minishell *mini);
 /*repreduce the unset bihavior*/
 void	my_unset(t_list *cmd, t_minishell *mini);
+void	my_export(t_list *cmd, t_minishell *mini);
+int		is_export(t_list *cmd);
 
 #endif

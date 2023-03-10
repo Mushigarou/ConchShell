@@ -35,6 +35,7 @@ B_F = check_built.c\
 		my_env.c\
 		my_exit.c\
 		my_unset.c\
+		my_export.c\
 
 O_D = obj
 

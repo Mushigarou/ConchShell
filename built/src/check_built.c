@@ -40,6 +40,8 @@ void	do_builtin(t_list *cmd, t_minishell *mini)
 		my_exit(cmd, mini);
 	else if (is_unset(cmd))
 		my_unset(cmd, mini);
+	else if (is_export(cmd))
+		my_export(cmd, mini);
 }
 
 int	should_not_fork(t_list *cmd)
