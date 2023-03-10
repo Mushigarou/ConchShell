@@ -40,7 +40,7 @@ int	is_the_target(char *str, char *env)
 		i++;
 	}
 	if ((env[i] == '=' || env[i] == '\0') && (str[i] == '\0'))
-			return (1);
+		return (1);
 	return (0);
 }
 

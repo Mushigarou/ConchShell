@@ -30,35 +30,6 @@ char	*inisialise_prompt(void)
 	return (ttl);
 }
 
-char	*print_type(int tp)
-{
-	if (tp == PP)
-		return ("pipe");
-	else if (tp == CMD)
-		return ("command");
-	else if (tp == ARG)
-		return ("argument");
-	else if (tp == INPT)
-		return ("input");
-	else if (tp == HEREDOC)
-		return ("herdoc");
-	else if (tp == APND)
-		return ("apand");
-	else if (tp == TRNC)
-		return ("trunc");
-	else if (tp == FLG)
-		return ("flag");
-	else if (tp == IN_F)
-		return ("input file");
-	else if (tp == AP_F)
-		return ("appand file");
-	else if (tp == TR_F)
-		return ("trunc file");
-	else if (tp == LMTR)
-		return ("heredoc limtier");
-	return ("indefind");
-}
-
 /*************TESTING*************/
 
 /*********************************/

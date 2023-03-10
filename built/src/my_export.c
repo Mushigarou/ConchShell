@@ -19,7 +19,7 @@ void	print_export(t_list *exp)
 {
 	t_list	*tmp;
 
-	sort_env(exp);
+	sort_list(exp);
 	tmp = exp;
 	while (tmp)
 	{
