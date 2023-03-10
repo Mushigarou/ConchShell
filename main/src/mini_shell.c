@@ -97,7 +97,7 @@ void	mini_shell(t_minishell *mini)
 	else if (!empty_line(mini->line))
 		take_and_do_cmd(mini);
 	free(mini->line);
-	system("leaks minishell");
+	// system("leaks minishell");
 }
 
 int	main(int ac, char **av, char **en)

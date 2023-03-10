@@ -29,7 +29,7 @@ char	**take_char_env(t_list *en)
 	tmp = en;
 	while (tmp)
 	{
-		if (tmp->acs)
+		if (tmp->acs && ft_strchr(tmp->pt, '='))
 		{
 			env[i] = ft_strdup(tmp->pt);
 			i++;

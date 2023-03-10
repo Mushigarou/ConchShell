@@ -21,10 +21,10 @@ int	check_unset_syntax(char *str, int *ext_st)
 
 	i = 0;
 	if (!ft_isalpha(str[i]) && str[i] != '_')
-		return (*ext_st = 1, 0);
+		return (*ext_st = 256, 0);
 	while (str[++i])
 		if (!ft_isalnum(str[i]) && str[i] != '_')
-			return (*ext_st = 1, 0);
+			return (*ext_st = 256, 0);
 	return (1);
 }
 
@@ -32,12 +32,14 @@ int	is_the_target(char *str, char *env)
 {
 	int	i;
 
-	i = -1;
-	while (env[++i] != '=')
+	i = 0;
+	while (env[i] != '=' && env[i] != '\0')
+	{
 		if (str[i] && (str[i] != env[i]))
 			return (0);
-	if (env[i] == '=')
-		if (str[i] == '\0')
+		i++;
+	}
+	if ((env[i] == '=' || env[i] == '\0') && (str[i] == '\0'))
 			return (1);
 	return (0);
 }

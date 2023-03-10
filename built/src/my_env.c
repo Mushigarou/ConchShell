@@ -22,7 +22,7 @@ void	my_env(t_list *env)
 	tmp = env;
 	while (tmp)
 	{
-		if (tmp->acs)
+		if (tmp->acs && ft_strchr(tmp->pt, '='))
 			ft_printf("%s\n", STDOUT_FILENO, tmp->pt);
 		tmp = tmp->next;
 	}
