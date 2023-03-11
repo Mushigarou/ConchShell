@@ -12,7 +12,7 @@ int		is_builtin(t_list *cmd);
 /*if there is a single command check if should not fork for the command*/
 int		should_not_fork(t_list *cmd);
 /*execute a builting command*/
-void	do_builtin(t_list *cmd, t_minishell *mini);
+void	do_builtin(t_list *cmd, t_minishell *mini, int f);
 /*check if the flag -n chould work*/
 int		check_echo_flg(char *flg);
 /*repreduce the echo bihavior*/

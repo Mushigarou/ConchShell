@@ -15,7 +15,7 @@ void	do_single_cmd(t_list *cmd, t_minishell *mini)
 	{
 		if (is_builtin(cmd))
 		{
-			do_builtin(cmd, mini);
+			do_builtin(cmd, mini, 1);
 			exit(mini->ext_st);
 		}
 		cm = take_char_cmd(cmd);
@@ -33,7 +33,7 @@ void	execute_one(t_list *cmd, t_minishell *mini)
 	int		pid;
 
 	if (is_builtin(cmd) && should_not_fork(cmd))
-		do_builtin(cmd, mini);
+		do_builtin(cmd, mini, 0);
 	else
 	{
 		pid = fork();

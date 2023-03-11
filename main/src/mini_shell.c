@@ -4,6 +4,7 @@ void	out(t_minishell *mini)
 {
 	ft_lstclear(&mini->env);
 	free(mini->prompt);
+	free(mini->line);
 	// system("leaks minishell");
 	ft_printf("exit\n", 1);
 	exit(mini->ext_st / 255);

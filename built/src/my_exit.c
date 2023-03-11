@@ -1,5 +1,15 @@
 #include"../inc/built.h"
 
+int	mtx_len(char **mx)
+{
+	int	i;
+
+	i = 0;
+	while (mx[i])
+		i++;
+	return (i);
+}
+
 int	is_exit(t_list *cmd)
 {
 	t_list	*tmp;
@@ -33,7 +43,7 @@ void	my_exit(t_list *cmd, t_minishell *mini)
 
 	cm = take_char_cmd(cmd);
 	ext = 0;
-	if (cm[0] && cm[1] && cm[2])
+	if (mtx_len(cm) > 2)
 	{
 		deallocate(cm);
 		mini->ext_st = (ft_printf("exit\nMinishell : %s : exit\n",
