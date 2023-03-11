@@ -125,22 +125,18 @@ $(LIBTOOL):
 
 $(O_D)/%.o: $(M_D)/%.c $(MN_H)
 	@printf "\r\033[0;33m⏳ main is compiling ...\033[0m"
-	@printf "\r\033[0;33m compiling\033[0m %s " $<
 	@cc $(FLAG) -c $< -o $@
 
 $(O_D)/%.o: $(P_D)/%.c $(PRS_H)
 	@printf "\r\033[0;33m⏳ parsing is compiling ...\033[0m"
-	@printf "\r\033[0;33m compiling\033[0m %s " $<
 	@cc $(FLAG) -c $< -o $@
 
 $(O_D)/%.o: $(E_D)/%.c $(EXC_H)
 	@printf "\r\033[0;33m⏳ execution is compiling ...\033[0m"
-	@printf "\r\033[0;33m compiling\033[0m %s " $<
 	@cc $(FLAG) -c $< -o $@
 
 $(O_D)/%.o: $(B_D)/%.c $(BLT_H)
 	@printf "\r\033[0;33m⏳ builtin is compiling ...\033[0m"
-	@printf "\r\033[0;33m compiling\033[0m %s " $<
 	@cc $(FLAG) -c $< -o $@
 
 clean: 
