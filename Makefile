@@ -37,6 +37,7 @@ B_F = check_built.c\
 		my_unset.c\
 		my_export.c\
 		export_sub_fncts.c\
+		export_sub_fncts_2.c\
 
 O_D = obj
 
