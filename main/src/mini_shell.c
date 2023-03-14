@@ -37,6 +37,7 @@ char	*inisialise_prompt(void)
 
 void	take_cmd(t_minishell *mini)
 {
+	mini->cmd = NULL;
 	split_cmd_line_by_space(mini);
 	split_by_pp_and_rdrct(mini);
 	identify_special_charcters(mini);

@@ -70,7 +70,9 @@ void	my_export(t_list *cmd, t_minishell *mini)
 	if (!cm[1])
 		print_export(mini);
 	else
+	{
 		while (cm[++i])
 			export_var(cm[i], mini);
+	}
 	deallocate(cm);
 }

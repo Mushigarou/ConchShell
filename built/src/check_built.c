@@ -78,6 +78,7 @@ int	should_not_fork(t_list *cmd)
 		cm = take_char_cmd(cmd);
 		if (!cm[1])
 			return (deallocate(cm), 0);
+		deallocate(cm);
 	}
 	return (1);
 }
