@@ -43,6 +43,8 @@ char	*find_path(char	*cm, t_list *en)
 	char	*cm_pth;
 	char	**env_pths;
 
+	if (!cm || !ft_strlen(cm))
+		return (NULL);
 	env_pths = NULL;
 	cm_pth = NULL;
 	env_pths = take_env_pths(en);
