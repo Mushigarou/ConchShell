@@ -8,7 +8,8 @@ RM = rm -rf
 
 NAME = minishell
 
-M_F = mini_shell.c
+M_F = mini_shell.c\
+		sub_main_fncts.c\
 
 P_F = check_redirection.c\
 		check_syntax.c\
