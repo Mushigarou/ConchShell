@@ -53,6 +53,8 @@ void	unset_from_env(char *str, t_minishell *mini)
 		ft_printf("Minishell : not a valid identifier : %s\n", 2, str);
 		return ;
 	}
+	else if (!ft_strcmp(str, "_") || !ft_strcmp(str, "PWD"))
+		return ;
 	tmp = mini->env;
 	while (tmp)
 	{

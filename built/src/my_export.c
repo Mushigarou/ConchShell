@@ -46,6 +46,8 @@ void	export_var(char *str, t_minishell *mini)
 	val = NULL;
 	tp = 0;
 	take_key_and_val(str, &key, &val, &tp);
+	if (!ft_strcmp(key, "_"))
+		return ;
 	if (already_exists(mini->env, key, &acs))
 	{
 		if (acs && tp)
