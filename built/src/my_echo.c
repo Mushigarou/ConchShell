@@ -33,11 +33,12 @@ void	my_echo(t_list *cmd)
 	char	**cm;
 	int		i;
 
+	i = 0;
 	cm = take_char_cmd(cmd);
-	if (cm[1] && check_echo_flg(cm[1]))
-		i = 1;
-	else
-		i = 0;
+	while (cm[++i])
+		if (!(cm[i] && check_echo_flg(cm[i])))
+			break ;
+	i -= 1;
 	while (cm[++i])
 	{
 		write(STDOUT_FILENO, cm[i], ft_strlen(cm[i]));
