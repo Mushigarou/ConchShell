@@ -31,13 +31,14 @@ void	open_heredoc(t_list *lim, t_minishell *mini, int *fl)
 	if (pipe(fd) < 0)
 		exit(error("pipe", errno));
 	pid = fork();
+	printf("-> %s\n", lim->pt);
 	if (!pid)
 	{
 		close(fd[0]);
 		while (1)
 		{
 			r = readline("Heredoc > ");
-			if (!r || !ft_strncmp(r, lim->pt, ft_strlen(r)))
+			if (!r || !ft_strcmp(r, lim->pt))
 				exit(EXIT_SUCCESS);
 			if (lim->acs)
 				r = expand_var(mini, r);
