@@ -25,7 +25,9 @@ char	*take_and_expand(t_minishell *mini, char *str, int *i)
 		if (str[j] == str[*i])
 			break ;
 	}
-	return (*i = j, ft_strjoin(r, ft_strdup("")));
+	if (!r)
+		r = ft_strjoin(r, ft_strdup(""));
+	return (*i = j, r);
 }
 
 char	*take_wthout_expand(char *str, int *i)

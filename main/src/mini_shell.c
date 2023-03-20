@@ -35,6 +35,7 @@ int	main(int ac, char **av, char **en)
 		exit(1);
 	}
 	mini.env = take_env(en);
+	mini.ext_st = 0;
 	while (1)
 		mini_shell(&mini);
 }

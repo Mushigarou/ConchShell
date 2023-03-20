@@ -52,8 +52,8 @@ char	*take_dollar(t_minishell *mini, char *line, int *i)
 			exp = expan_variable(&line[j - 1], mini);
 			while (line[j])
 			{
-				if (!ft_isalnum(line[j]) && line[j] != '_'
-					&& line[j] != '?')
+				if (!((ft_isalnum(line[j]) && line[j] == '_')
+						|| line[j] == '?'))
 					break ;
 				j++;
 			}
