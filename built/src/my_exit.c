@@ -29,7 +29,7 @@ int	valid_arg(char *arg)
 {
 	int	i;
 
-	i = -1;
+	i = -1 + (arg[0] == '-');
 	while (arg[++i])
 		if (!ft_isdigit(arg[i]))
 			return (0);
