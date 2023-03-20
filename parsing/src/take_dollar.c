@@ -57,7 +57,7 @@ char	*take_dollar(t_minishell *mini, char *line, int *i)
 					break ;
 				j++;
 			}
-			return (*i = j, printf("-> %s\n", exp),exp);
+			return (*i = j, exp);
 		}
 		return (*i = j, ft_strdup("$"));
 	}
