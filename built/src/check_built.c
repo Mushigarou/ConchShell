@@ -33,10 +33,8 @@ int	rdrct_outside_fork(t_list *cmd, t_minishell *mini)
 	pid = fork();
 	if (!pid)
 	{
-		if (check_in_rdrct(cmd))
-			take_input(cmd, mini);
-		if (check_out_rdrct(cmd))
-			take_output(cmd);
+		if (check_in_rdrct(cmd) || check_out_rdrct(cmd))
+			open_rdrct(cmd, mini);
 		exit(EXIT_SUCCESS);
 	}
 	else

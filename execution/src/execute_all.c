@@ -7,10 +7,8 @@ void	do_single_cmd(t_list *cmd, t_minishell *mini)
 
 	cm = NULL;
 	cm_pth = NULL;
-	if (check_in_rdrct(cmd))
-		take_input(cmd, mini);
-	if (check_out_rdrct(cmd))
-		take_output(cmd);
+	if (check_in_rdrct(cmd) || check_out_rdrct(cmd))
+		open_rdrct(cmd, mini);
 	if (check_cmd(cmd))
 	{
 		if (is_builtin(cmd))

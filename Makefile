@@ -26,8 +26,7 @@ E_F =   convert_env_list_to_char.c\
 			take_cmd_and_prts.c\
 			take_cmd_by_cmd.c\
 			take_cmd_path.c\
-			take_in_rdrct.c\
-			take_out_rdrct.c\
+			take_rdrct.c\
 
 B_F = check_built.c\
 		my_echo.c\

@@ -1,5 +1,19 @@
 #include"../inc/execution.h"
 
+int	check_out_rdrct(t_list *cmd)
+{
+	t_list	*tmp;
+
+	tmp = cmd;
+	while (tmp)
+	{
+		if (tmp->wt == TRNC || tmp->wt == APND)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 int	error(char *er, int ext_er)
 {
 	if (ext_er == 127)

@@ -29,11 +29,11 @@ int	main(int ac, char **av, char **en)
 
 	(void)ac;
 	(void)av;
-	// if (!en[0])
-	// {
-	// 	ft_printf("Minishell : there is no envirenment\n", 2);
-	// 	exit(1);
-	// }
+	if (!en[0])
+	{
+		ft_printf("Minishell : there is no envirenment !*#^&# 😡🤬\n", 2);
+		exit(1);
+	}
 	mini.env = take_env(en);
 	while (1)
 		mini_shell(&mini);
