@@ -82,5 +82,7 @@ void	extract_wild_card(t_minishell *mini);
 void	extract_and_add_to_list(t_list **new_lst, char *ex);
 /*check if the file match the wildcard*/
 int		is_a_match(char *name, char *pattren);
+/* merge stras*/
+char	*merge_star(char *str);
 
 #endif
