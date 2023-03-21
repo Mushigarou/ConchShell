@@ -50,7 +50,6 @@ char	*expand_var(t_minishell *mini, char *old_str)
 			new_str = ft_strjoin(new_str, take_dollar(mini, old_str, &i));
 		if (old_str[i] == '\0')
 			break ;
-		// printf("-> %s\n-> %d", &old_str[i], i);
 	}
 	return (free(old_str), new_str);
 }

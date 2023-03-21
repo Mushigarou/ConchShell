@@ -19,6 +19,7 @@ P_F = check_redirection.c\
 		split_by_space.c\
 		lexer.c\
 		remove_quotes.c\
+		wild_card.c\
 
 E_F =   convert_env_list_to_char.c\
 			execute_all.c\

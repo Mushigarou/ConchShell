@@ -74,5 +74,13 @@ void	identify_flag(t_minishell *mini);
 void	identify_arg(t_minishell *mini);
 /*remove the qouts and expand if needed*/
 void	remove_quotes(t_minishell *mini);
+/*check if there is a '*' in the arguiment string*/
+int		should_be_extracted(char *str);
+/*repreducing the bihavior of wildcard*/
+void	extract_wild_card(t_minishell *mini);
+/*extract and add to the list*/
+void	extract_and_add_to_list(t_list **new_lst, char *ex);
+/*check if the file match the wildcard*/
+int		is_a_match(char *name, char *pattren);
 
 #endif

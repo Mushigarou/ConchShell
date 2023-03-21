@@ -55,7 +55,7 @@ char	*take_dollar(t_minishell *mini, char *line, int *i)
 			else if (ft_isalnum(line[j]) || line[j] == '_')
 				while (line[++j])
 					if (!ft_isalnum(line[j]) && line[j] != '_')
-					break ;
+						break ;
 			return (*i = j, exp);
 		}
 		return (*i = j, ft_strdup("$"));
