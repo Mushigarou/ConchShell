@@ -54,13 +54,11 @@ void	open_heredoc(t_list *lim, t_minishell *mini, int *fl)
 
 void	open_output(t_list *fl, int *fd)
 {
-	if (access(fl->pt, W_OK) != 0)
-		exit(error(fl->pt, 1));
 	if (fl->wt == TR_F)
 		*fd = open(fl->pt, (O_CREAT | O_TRUNC | O_WRONLY), 0777);
 	else if (fl->wt == AP_F)
 		*fd = open(fl->pt, (O_CREAT | O_APPEND | O_WRONLY), 0777);
-	if (*fd < 0)
+	if (*fd < 0 || access(fl->pt, W_OK) != 0)
 		exit(error(fl->pt, 1));
 }
 

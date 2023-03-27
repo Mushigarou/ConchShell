@@ -42,10 +42,11 @@ void	execute_one(t_list *cmd, t_minishell *mini)
 	}
 }
 
-void	wait_for_childs(t_minishell *mini, int i)
+void	wait_for_childs(t_minishell *mini)
 {
-	while (--i >= 0)
-		wait(NULL);
+	while (1)
+		if (wait(NULL) == -1)
+			break ;
 	if (WIFEXITED(mini->ext_st))
 		mini->ext_st = WEXITSTATUS(mini->ext_st);
 	exit(mini->ext_st);
@@ -68,14 +69,14 @@ void	execute_mltpl_cmd(t_list **cmd, t_minishell *mini, int i)
 		else
 		{
 			close(mini->fd[1]);
-			if (cmd[i + 1] && !check_in_rdrct(cmd[i + 1]))
+			if (!check_in_rdrct(cmd[i + 1]))
 				dup2(mini->fd[0], STDIN_FILENO);
 			close(mini->fd[0]);
 		}
 		if (!cmd[i + 1])
 			wait(&mini->ext_st);
 	}
-	wait_for_childs(mini, i);
+	wait_for_childs(mini);
 }
 
 void	execute_all(t_list **cmd, int ct, t_minishell *mini)
