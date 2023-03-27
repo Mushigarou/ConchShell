@@ -17,10 +17,9 @@ int	check_out_rdrct(t_list *cmd)
 int	error(char *er, int ext_er)
 {
 	if (ext_er == 127)
-		ft_printf("Minishell : command not found : %s\n", STDERR_FILENO, er);
-	else if (ext_er == 1)
-		ft_printf("Minishell : No such file or directory : %s\n",
-			STDERR_FILENO, er);
+		ft_printf("Minishell : Command not found : %s\n", STDERR_FILENO, er);
+	else if (ext_er == 126)
+		ft_printf("Minishell : Is a directory : %s\n", STDERR_FILENO, er);
 	else if (ext_er == 258)
 		ft_printf("Minishell : Syntax error\n", STDERR_FILENO);
 	else
@@ -31,8 +30,16 @@ int	error(char *er, int ext_er)
 void	cmd_not_found(char **cm)
 {
 	int	ext;
+	DIR	*dir;
 
-	ext = error(cm[0], 127);
+	dir = opendir(cm[0]);
+	if (dir)
+	{
+		closedir(dir);
+		ext = error(cm[0], 126);
+	}
+	else
+		ext = error(cm[0], 127);
 	deallocate(cm);
 	exit(ext);
 }

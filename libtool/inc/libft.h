@@ -22,6 +22,7 @@
 # include <termios.h>
 # include <termcap.h>
 # include <errno.h>
+# include <stddef.h>
 
 typedef struct s_list
 {
