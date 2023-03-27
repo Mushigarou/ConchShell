@@ -36,7 +36,8 @@ void	open_heredoc(t_list *lim, t_minishell *mini, int *fl)
 		close(fd[0]);
 		while (1)
 		{
-			r = readline("Heredoc > ");
+			ft_putstr_fd("Heredoc > ", 2);
+			r = gnl(0);
 			if (!r || !ft_strcmp(r, lim->pt))
 				exit(EXIT_SUCCESS);
 			if (lim->acs)
