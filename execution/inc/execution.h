@@ -59,7 +59,7 @@ int		error(char *er, int ext_er);
 and deallocate the command and exit the process*/
 void	cmd_not_found(char **cm);
 /*execute command line with multipel pipes*/
-void	execute_mltpl_cmd(t_list **cmd, t_minishell *mini);
+void	execute_mltpl_cmd(t_list **cmd, t_minishell *mini, int i);
 /*open all rederection*/
 void	open_rdrct(t_list *cmd, t_minishell *mini);
 
