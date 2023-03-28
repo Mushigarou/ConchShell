@@ -27,7 +27,7 @@ char	*take_rest(char *r)
 	if (!ft_strchr(r, '\n'))
 		return (free(r), NULL);
 	else
-		i = (ft_strchr(r, '\n') - r) + 1;
+		i = (ft_strchr(r, '\n') - r);
 	rst = ft_substr(r, i, ft_strlen(r) - i - 1);
 	return (free(r), rst);
 }
