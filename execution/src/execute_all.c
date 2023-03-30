@@ -93,7 +93,7 @@ void	execute_all(t_list **cmd, int ct, t_minishell *mini)
 		pid = fork();
 		if (!pid)
 		{
-			signal(SIGINT, handl_segint_heredoc);
+			signal(SIGINT, handl_segint_child);
 			execute_mltpl_cmd(cmd, mini, -1);
 		}
 		else

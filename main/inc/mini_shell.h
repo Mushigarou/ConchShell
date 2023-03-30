@@ -5,7 +5,6 @@
 # include"../../execution/inc/execution.h"
 # include"../../libtool/inc/libft.h"
 # include<signal.h>
-# include"../../signals/inc/signals.h"
 
 int		g_ext_st;
 
@@ -15,6 +14,6 @@ char	*inisialise_prompt(void);
 void	take_cmd(t_minishell *mini);
 void	take_and_do_cmd(t_minishell *mini);
 void	handl_segint(int segnum);
-void	handl_segint_heredoc(int segnum);
+void	handl_segint_child(int segnum);
 
 #endif

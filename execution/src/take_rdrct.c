@@ -31,7 +31,7 @@ void	open_heredoc(t_list *lim, t_minishell *mini, int *fl)
 	r = NULL;
 	if (pipe(fd) < 0)
 		exit(error("pipe", errno));
-	signal(SIGINT, handl_segint_heredoc);
+	signal(SIGINT, handl_segint_child);
 	if (!fork())
 	{
 		close(fd[0]);
