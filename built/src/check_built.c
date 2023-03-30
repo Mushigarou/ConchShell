@@ -38,8 +38,8 @@ int	rdrct_outside_fork(t_list *cmd, t_minishell *mini)
 		exit(EXIT_SUCCESS);
 	}
 	else
-		waitpid(pid, &mini->ext_st, 0);
-	if (mini->ext_st != 0)
+		waitpid(pid, mini->ext_st, 0);
+	if (*mini->ext_st != 0)
 		return (0);
 	return (1);
 }

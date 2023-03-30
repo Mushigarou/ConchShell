@@ -48,7 +48,7 @@ void	unset_from_env(char *str, t_minishell *mini)
 {
 	t_list	*tmp;
 
-	if (!check_unset_syntax(str, &mini->ext_st))
+	if (!check_unset_syntax(str, mini->ext_st))
 	{
 		ft_printf("Minishell : not a valid identifier : %s\n", 2, str);
 		return ;

@@ -34,7 +34,7 @@ typedef struct s_list
 
 typedef struct s_minishell
 {
-	int		ext_st;
+	int		*ext_st;
 	int		fd[2];
 	char	*line;
 	char	*prompt;

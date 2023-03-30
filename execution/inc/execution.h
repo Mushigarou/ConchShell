@@ -4,6 +4,7 @@
 # include"../../libtool/inc/libft.h"
 # include"../../parsing/inc/parsing.h"
 # include"../../built/inc/built.h"
+# include"../../main/inc/mini_shell.h"
 
 /*calculate the len of the accessable parts of envirement*/
 int		env_len(t_list *en);

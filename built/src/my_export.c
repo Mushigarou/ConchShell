@@ -40,7 +40,7 @@ void	export_var(char *str, t_minishell *mini)
 	int		tp;
 	int		acs;
 
-	if (!check_export_syntax(str, &mini->ext_st))
+	if (!check_export_syntax(str, mini->ext_st))
 		return ;
 	key = NULL;
 	val = NULL;

@@ -46,7 +46,7 @@ void	my_exit(t_list *cmd, t_minishell *mini)
 	if (mtx_len(cm) > 2)
 	{
 		deallocate(cm);
-		mini->ext_st = (ft_printf("exit\nMinishell : %s : exit\n",
+		*mini->ext_st = (ft_printf("exit\nMinishell : %s : exit\n",
 					STDERR_FILENO, "too many arguments"), 1 * 256);
 		return ;
 	}

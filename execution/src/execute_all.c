@@ -14,7 +14,7 @@ void	do_single_cmd(t_list *cmd, t_minishell *mini)
 		if (is_builtin(cmd))
 		{
 			do_builtin(cmd, mini, 1);
-			exit(mini->ext_st);
+			exit(*mini->ext_st);
 		}
 		cm = take_char_cmd(cmd);
 		cm_pth = take_path(cm[0], mini);
@@ -38,7 +38,7 @@ void	execute_one(t_list *cmd, t_minishell *mini)
 		if (!pid)
 			do_single_cmd(cmd, mini);
 		else
-			waitpid(pid, &mini->ext_st, 0);
+			waitpid(pid, mini->ext_st, 0);
 	}
 }
 
@@ -47,9 +47,9 @@ void	wait_for_childs(t_minishell *mini)
 	while (1)
 		if (wait(NULL) == -1)
 			break ;
-	if (WIFEXITED(mini->ext_st))
-		mini->ext_st = WEXITSTATUS(mini->ext_st);
-	exit(mini->ext_st);
+	if (WIFEXITED(*mini->ext_st))
+		*mini->ext_st = WEXITSTATUS(*mini->ext_st);
+	exit(*mini->ext_st);
 }
 
 void	execute_mltpl_cmd(t_list **cmd, t_minishell *mini, int i)
@@ -76,7 +76,7 @@ void	execute_mltpl_cmd(t_list **cmd, t_minishell *mini, int i)
 			close(mini->fd[0]);
 		}
 		if (!cmd[i + 1])
-			wait(&mini->ext_st);
+			wait(mini->ext_st);
 	}
 	wait_for_childs(mini);
 }
@@ -92,9 +92,12 @@ void	execute_all(t_list **cmd, int ct, t_minishell *mini)
 	{
 		pid = fork();
 		if (!pid)
+		{
+			signal(SIGINT, handl_segint_heredoc);
 			execute_mltpl_cmd(cmd, mini, -1);
+		}
 		else
-			waitpid(pid, &mini->ext_st, 0);
+			waitpid(pid, mini->ext_st, 0);
 	}
 	i = -1;
 	while (cmd[++i])
