@@ -53,7 +53,7 @@ void	my_exit(t_list *cmd, t_minishell *mini)
 	ft_printf("exit\n", STDERR_FILENO);
 	if (cm[1])
 	{
-		if (valid_arg(cm[1]) && ft_strlen(cm[1]) <= 19)
+		if (valid_arg(cm[1]))
 			ext = ft_atoi(cm[1]);
 		else
 			ext = (ft_printf("Minishell : %s : %s\n",

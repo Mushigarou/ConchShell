@@ -17,13 +17,16 @@ int	check_out_rdrct(t_list *cmd)
 int	error(char *er, int ext_er)
 {
 	if (ext_er == 127)
-		ft_printf("Minishell : Command not found : %s\n", STDERR_FILENO, er);
+		ft_printf("%s❌Minishell : %sCommand not found : %s%s%s\n", STDERR_FILENO,
+			RED, WHITE, RED, er, WHITE);
 	else if (ext_er == 126)
-		ft_printf("Minishell : Is a directory : %s\n", STDERR_FILENO, er);
+		ft_printf("%s❌Minishell : %sIs a directory : %s%s%s\n", STDERR_FILENO,
+			RED, WHITE, RED, er, WHITE);
 	else if (ext_er == 258)
-		ft_printf("Minishell : Syntax error\n", STDERR_FILENO);
+		ft_printf("%s❌Minishell : %sSyntax error\n", STDERR_FILENO, RED, WHITE);
 	else
-		ft_printf("Minishell : %s : %s\n", STDERR_FILENO, strerror(errno), er);
+		ft_printf("%s❌Minishell : %s%s : %s%s%s\n", STDERR_FILENO, RED, WHITE,
+			strerror(errno), RED, er, WHITE);
 	return (ext_er);
 }
 

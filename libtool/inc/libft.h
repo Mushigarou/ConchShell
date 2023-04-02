@@ -23,6 +23,12 @@
 # include <termcap.h>
 # include <errno.h>
 # include <stddef.h>
+# include <signal.h>
+
+# define WHITE "\001\e[0m\002"
+# define RED "\001\e[31;1m\002"
+# define YELLOW "\001\e[33;1;3m\002"
+# define GREEN "\001\e[32;3;1m\002"
 
 typedef struct s_list
 {
