@@ -46,6 +46,7 @@ int	rdrct_outside_fork(t_list *cmd, t_minishell *mini)
 
 void	do_builtin(t_list *cmd, t_minishell *mini, int f)
 {
+	*mini->ext_st = 0;
 	if (!f)
 		if (!rdrct_outside_fork(cmd, mini))
 			return ;

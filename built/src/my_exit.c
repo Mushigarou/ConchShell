@@ -47,7 +47,7 @@ void	my_exit(t_list *cmd, t_minishell *mini)
 	{
 		deallocate(cm);
 		*mini->ext_st = (ft_printf("exit\nMinishell : %s : exit\n",
-					STDERR_FILENO, "too many arguments"), 1 * 256);
+					STDERR_FILENO, "too many arguments"), 1);
 		return ;
 	}
 	ft_printf("exit\n", STDERR_FILENO);
@@ -58,7 +58,7 @@ void	my_exit(t_list *cmd, t_minishell *mini)
 		else
 			ext = (ft_printf("Minishell : %s : %s\n",
 						STDERR_FILENO, "numeric arguments is required",
-						cm[1]), 255);
+						cm[1]), 2);
 	}
 	deallocate(cm);
 	exit(ext);

@@ -21,10 +21,10 @@ int	check_unset_syntax(char *str, int *ext_st)
 
 	i = 0;
 	if (!ft_isalpha(str[i]) && str[i] != '_')
-		return (*ext_st = 256, 0);
+		return (*ext_st = 1, 0);
 	while (str[++i])
 		if (!ft_isalnum(str[i]) && str[i] != '_')
-			return (*ext_st = 256, 0);
+			return (*ext_st = 1, 0);
 	return (1);
 }
 
