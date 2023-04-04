@@ -22,7 +22,7 @@ void	my_pwd(t_list *env)
 
 	if (getcwd(cd, PATH_MAX))
 	{
-		ft_printf("%s\n", STDOUT_FILENO,cd);
+		ft_printf("%s\n", STDOUT_FILENO, cd);
 		return ;
 	}
 	tmp = env;

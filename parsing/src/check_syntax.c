@@ -17,23 +17,22 @@ int	empty_line(char *line)
 int	in_quotes(char *line, int i)
 {
 	int	j;
-	int	in;
+	int	in_s;
+	int	in_d;
 
 	j = -1;
-	in = 0;
+	in_s = 0;
+	in_d = 0;
 	while (line[++j])
 	{
-		if (line[j] == '\'' || line[j] == '"')
-		{
-			if (!in)
-				in = 1;
-			else
-				in = 0;
-		}
+		if (line[j] == '\'')
+			in_s = (in_s == 0);
+		if (line[j] == '"')
+			in_d = (in_d == 0);
 		if (j == i)
 			break ;
 	}
-	return (in);
+	return (in_s || in_d);
 }
 
 int	valid_ct(char *cl)
