@@ -69,7 +69,7 @@ void	update_env(t_minishell *mini)
 	if (!getcwd(cw, PATH_MAX))
 	{
 		*mini->ext_st = error("getcwd", 1);
-		ft_printf("can not retrive the current directory path\n", 2);
+		ft_printf("\tcan not retrive the current directory path\n", 2);
 		return ;
 	}
 	update_oldpwd(mini);

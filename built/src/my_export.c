@@ -27,7 +27,8 @@ void	print_export(t_minishell *mini)
 	while (tmp)
 	{
 		if (tmp->acs)
-			ft_printf("declare - x %s\n", STDOUT_FILENO, tmp->pt);
+			ft_printf("%sdeclare - x %s%s\n", STDOUT_FILENO, GREEN,
+				WHITE, tmp->pt);
 		tmp = tmp->next;
 	}
 	ft_lstclear(&exprt);

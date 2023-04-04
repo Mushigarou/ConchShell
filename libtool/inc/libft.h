@@ -1,9 +1,9 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <stdio.h>
 # include <dirent.h>
 # include <ttyent.h>
 # include <signal.h>

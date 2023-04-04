@@ -4,7 +4,7 @@ void	handl_segint_child(int segnum)
 {
 	if (segnum == SIGINT)
 	{
-		write(1,"\n",1);
+		write(1, "\n", 1);
 		g_ext_st = 130;
 		exit(g_ext_st);
 	}
@@ -14,7 +14,7 @@ void	handl_segint(int segnum)
 {
 	if (segnum == SIGINT)
 	{
-		write(1,"\n",1);
+		write(1, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		if (wait(NULL) == -1)
