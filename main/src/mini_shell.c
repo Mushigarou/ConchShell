@@ -15,7 +15,7 @@ void	handl_segint(int segnum)
 	if (segnum == SIGINT)
 	{
 		write(1, "\n", 1);
-		rl_replace_line("", 0);
+		// rl_replace_line("", 0);
 		rl_on_new_line();
 		if (wait(NULL) == -1)
 			rl_redisplay();
@@ -25,8 +25,10 @@ void	handl_segint(int segnum)
 
 void	take_and_do_cmd(t_minishell *mini)
 {
+	// tokenization of input
 	take_cmd(mini);
-	split_and_execute_cmd(mini);
+	// execution
+	// exec_input(mini);
 	ft_lstclear(&mini->cmd);
 }
 
@@ -40,7 +42,10 @@ void	mini_shell(t_minishell *mini)
 	if (!empty_line(mini->line))
 		add_history(mini->line);
 	if (check_syntax(mini->line) == 258)
-		*mini->ext_st = error(NULL, 258);
+		{
+			ft_printf("Syntax Error\n", 2);
+			*mini->ext_st = 258;
+		}
 	else if (!empty_line(mini->line))
 		take_and_do_cmd(mini);
 	free(mini->line);

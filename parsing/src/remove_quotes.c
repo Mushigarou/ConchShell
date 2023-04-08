@@ -19,7 +19,7 @@ char	*take_and_expand(t_minishell *mini, char *str, int *i)
 			j++;
 		}
 		if (j > s)
-			r = ft_strjoin(r, ft_substr(str, s, (j - s) - (str[j] == str[*i])));
+			r = ft_strjoin(r, ft_substr(str, s, (j - s)));
 		if (str[j] == '$')
 			r = ft_strjoin(r, take_dollar(mini, str, &j));
 		if (str[j] == str[*i])
@@ -55,7 +55,7 @@ char	*take_new_str(t_minishell *mini, t_list *prt)
 	while (prt->pt[i])
 	{
 		s = i;
-		while (prt->pt[i] != '"' && prt->pt[i] != '\'')
+		while (prt->pt[i] != '"' && prt->pt[i] != '\'' && prt->pt[i])
 			i++;
 		if (i > s)
 			r = ft_strjoin(r, ft_substr(prt->pt, s, i - s));
@@ -63,6 +63,8 @@ char	*take_new_str(t_minishell *mini, t_list *prt)
 			r = ft_strjoin(r, take_and_expand(mini, prt->pt, &i));
 		else if (prt->pt[i] == '\'' || (prt->pt[i] == '"' && prt->wt == LMTR))
 			r = ft_strjoin(r, take_wthout_expand(&prt->pt[i], &i, prt->pt[i]));
+		if (!prt->pt[i])
+			break ;
 		i++;
 	}
 	return (free(prt->pt), r);
