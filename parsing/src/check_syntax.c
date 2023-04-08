@@ -32,7 +32,7 @@ int	in_quotes(char *line, int i)
 		if (j == i)
 			break ;
 	}
-	return (in_s || in_d);
+	return ((in_s || in_d));
 }
 
 int	valid_ct(char *cl)
