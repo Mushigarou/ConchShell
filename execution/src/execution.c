@@ -1,6 +1,5 @@
+#include "../inc/execution.h"
 /*
-
-
 Implement redirections:
 	◦< should redirect input.
 	◦> should redirect output.
@@ -59,6 +58,8 @@ leaks.
 
 void	execute_cmds(t_minishell *mini)
 {
+	// printf("%s", mini->cmd->pt);
+	// printf("%s", mini->cmd->next->pt);
 	// parsing mini->cmd
 		// 1 - int nbr_pipes = nbr_pipes(mini->cmd)
 			// ....
@@ -68,7 +69,6 @@ void	execute_cmds(t_minishell *mini)
 			// 3 - check which token is it (CMD, FLG, PP...)
 				// 3.1 if (! HERDOC)
 					
-			
 	//
 	return ;
 }

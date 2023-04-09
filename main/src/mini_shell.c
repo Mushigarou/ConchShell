@@ -28,6 +28,7 @@ void	take_and_do_cmd(t_minishell *mini)
 	// tokenization of input
 	take_cmd(mini);
 	// execution
+	execute_cmds(mini);
 	// exec_input(mini);
 	ft_lstclear(&mini->cmd);
 }
