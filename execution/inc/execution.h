@@ -2,18 +2,30 @@
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-# include"../../libtool/inc/libft.h"
-# include"../../parsing/inc/parsing.h"
-# include"../../built/inc/built.h"
-# include"../../main/inc/mini_shell.h"
+# include "libft.h"
+# include "parsing.h"
+# include "built.h"
+# include "mini_shell.h"
+
+typedef struct s_redrc
+{
+	char	*file_name;
+	int		type;
+	struct s_redrc	*next;
+}	t_redrc;
+
+typedef struct s_exec
+{
+	char	**cmd_exec;
+	t_redrc	redrc; // par default *(NULL)
+	struct s_exec	*next;  // if (next == 1) {means there is a pipe}
+}	t_exec;
 
 // ************ Execution **************
 void	execute_cmds(t_minishell *mini);
 // **	Converts env variable from (t_list *) to a (char **)
 char	**convert_env(t_list *env);
 // **	Returns path variable splitted
-char	**get_path(t_minishell *mini);
-// **	Returns path of the the given cmd
-char	*find_cmd(char **path, char *cmd);
+char 	*get_cmd_path(t_minishell *mini, char *cmd);
 
 #endif

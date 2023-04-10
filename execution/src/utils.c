@@ -1,4 +1,4 @@
-#include "../inc/execution.h"
+#include "execution.h"
 
 char *find_cmd(char **path, char *cmd)
 {
@@ -26,7 +26,7 @@ char *find_cmd(char **path, char *cmd)
 	return (NULL);
 }
 
-char	**get_path(t_minishell *mini)
+char	*get_cmd_path(t_minishell *mini, char *cmd)
 {
 	char **path;
 	t_list *tmp;
@@ -45,9 +45,9 @@ char	**get_path(t_minishell *mini)
 	}
 	if (!path)
 	{
-		perror("minishell:"); exit(127);
+		perror("minishell:"); *mini->ext_st = 127; exit(127);
 	}
-	return (path);
+	return (find_cmd(path, cmd));
 }
 
 char	**convert_env(t_list *env)
