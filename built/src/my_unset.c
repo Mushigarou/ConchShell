@@ -30,17 +30,15 @@ int	check_unset_syntax(char *str, int *ext_st)
 
 int	is_the_target(char *str, char *env)
 {
-	int	i;
+	char	*key;
 
-	i = 0;
-	while (env[i] != '=' && env[i] != '\0')
-	{
-		if (str[i] && (str[i] != env[i]))
-			return (0);
-		i++;
-	}
-	if ((env[i] == '=' || env[i] == '\0') && (str[i] == '\0'))
-		return (1);
+	if (ft_strchr(env, '='))
+		key = ft_substr(env, 0, ft_strchr(env, '=') - env);
+	else
+		key = ft_strdup(env);
+	if (!ft_strcmp(key, str))
+		return (free(key), 1);
+	free(key);
 	return (0);
 }
 
@@ -60,7 +58,10 @@ void	unset_from_env(char *str, t_minishell *mini)
 	while (tmp)
 	{
 		if (is_the_target(str, tmp->pt))
+		{
+			printf("-> %s\n", tmp->pt);
 			tmp->acs = 0;
+		}
 		tmp = tmp->next;
 	}
 }
