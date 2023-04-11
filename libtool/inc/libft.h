@@ -30,11 +30,12 @@
 # define YELLOW "\001\e[33;1;3m\002"
 # define GREEN "\001\e[32;3;1m\002"
 
+
 typedef struct s_list
 {
 	char			*pt;
 	int				wt;
-	int				acs;
+	int				acs; // if acs= 0 Noexpand, else expand (t_list *redrc)
 	struct s_list	*next;
 }	t_list;
 

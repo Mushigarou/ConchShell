@@ -19,7 +19,7 @@ char	*take_and_expand(t_minishell *mini, char *str, int *i)
 			j++;
 		}
 		if (j > s)
-			r = ft_strjoin(r, ft_substr(str, s, (j - s) - (str[j] == str[*i])));
+			r = ft_strjoin(r, ft_substr(str, s, (j - s)));
 		if (str[j] == '$')
 			r = ft_strjoin(r, take_dollar(mini, str, &j));
 		if (str[j] == str[*i])
