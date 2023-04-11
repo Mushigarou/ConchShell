@@ -37,6 +37,7 @@ void	take_exc_prt(t_minishell *mini, t_list *cmd)
 	new = (t_exec *)malloc(sizeof(t_exec));
 	if (!new)
 		return ;
+	new->next = NULL;
 	new->cmd_exec = NULL;
 	if (check_cmd(cmd))
 		new->cmd_exec = take_char_cmd(cmd);

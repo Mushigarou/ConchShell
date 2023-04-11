@@ -26,7 +26,7 @@ void	handl_segint(int segnum)
 void	take_and_do_cmd(t_minishell *mini)
 {
 	take_cmd(mini);
-	split_and_execute_cmd(mini);
+	// split_and_execute_cmd(mini);
 	ft_lstclear(&mini->cmd);
 }
 
