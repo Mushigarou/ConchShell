@@ -39,11 +39,11 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-typedef struct s_exec // Node 1 :[** cat | -e || ]
+typedef struct s_exec
 {
-	char			**cmd_exec; //ls -al 
-	t_list			*redrc; // NULL
-	struct s_exec	*next; // if (next == 1) {means there is a pipe}
+	char			**cmd_exec;
+	t_list			*redrc;
+	struct s_exec	*next;
 }	t_exec;
 
 typedef struct s_minishell
@@ -52,7 +52,7 @@ typedef struct s_minishell
 	int		fd[2];
 	char	*line;
 	char	*prompt;
-	t_exec	*exec;
+	t_exec	*exc;
 	t_list	*cmd;
 	t_list	*env;
 }	t_minishell;

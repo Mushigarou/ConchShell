@@ -20,8 +20,7 @@ int	check_for_expander(t_list *prt)
 	{
 		while (prt->pt[++i])
 		{
-			if (prt->pt[i] == '$' && (!ft_strchr(prt->pt, '\'')
-					&& !ft_strchr(prt->pt, '"')))
+			if (prt->pt[i] == '$' && !in_quotes(prt->pt, i))
 				return (1);
 		}
 	}
