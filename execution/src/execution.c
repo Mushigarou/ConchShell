@@ -88,11 +88,17 @@ void	handle_redrc_and_heredoc(t_minishell *mini)
 void	execute_one_command(t_minishell *mini)
 {
 	char	*path;
-	if (mini->exc->redrc != NULL)
-		handle_redrc_and_heredoc(mini);
-	path = get_cmd_path(mini, mini->exc->cmd_exec[0]);
+
+	path = NULL;
+	if (mini->exc && mini->exc->cmd_exec)
+	{
+		if (mini->exc->redrc != NULL)
+			handle_redrc_and_heredoc(mini);
+		path = get_cmd_path(mini, mini->exc->cmd_exec[0]);
+	}
 	execve(path, mini->exc->cmd_exec, take_char_env(mini->env));
-	error("minishell_exec_one:", 127);
+	*mini->ext_st = 127;
+	perror("minishell_exec_one");
 	return ;
 }
 
