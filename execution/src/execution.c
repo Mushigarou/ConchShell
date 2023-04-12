@@ -111,11 +111,11 @@ void	execute_command_with_nopipe(t_minishell *mini)
 		execute_one_command(mini);
 	}
 	wait(mini->ext_st);
-	if (WIFEXITED(mini->ext_st))
+	if (WIFEXITED(*mini->ext_st))
 	{
-		*mini->ext_st = WEXITSTATUS(mini->ext_st);
-		if (*mini->ext_st != 0)
-			exit(*mini->ext_st);
+		*mini->ext_st = WEXITSTATUS(*mini->ext_st);
+		// if (*mini->ext_st != 0)
+		// 	exit(*mini->ext_st);
 	}
 	return ;
 }
