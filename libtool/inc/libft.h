@@ -52,6 +52,7 @@ typedef struct s_minishell
 	int		fd[2];
 	char	*line;
 	char	*prompt;
+	char	filename[15];
 	t_exec	*exc;
 	t_list	*cmd;
 	t_list	*env;

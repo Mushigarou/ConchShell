@@ -23,7 +23,8 @@ PARSE := 	parsing/src/check_redirection.c \
 			parsing/src/wild_card.c
 
 EXEC :=  	execution/src/execution.c \
-			execution/src/utils.c
+			execution/src/utils.c \
+			execution/src/heredocument.c
 			
 
 SRC := $(MAIN) $(PARSE) $(EXEC)
