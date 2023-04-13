@@ -2,6 +2,7 @@
 
 char *find_cmd(char **path, char *cmd, t_minishell *mini)
 {
+	(void)mini;
 	char *tmp;
 	char *tmp1;
 
@@ -9,8 +10,7 @@ char *find_cmd(char **path, char *cmd, t_minishell *mini)
 	{
 		if (access(cmd, F_OK | X_OK) == 0)
 			return (cmd);
-		perror("minishell");
-		exit(127);
+		return(NULL);
 	}
 	while (path && *path)
 	{
@@ -21,9 +21,6 @@ char *find_cmd(char **path, char *cmd, t_minishell *mini)
 		free(tmp1);
 		path++;
 	}
-	*mini->ext_st = 127;
-	perror("minishell_find_cmd");
-	exit(127);
 	return (NULL);
 }
 

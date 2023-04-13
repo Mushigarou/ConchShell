@@ -51,10 +51,13 @@
 void	handle_redrc_and_heredoc(t_minishell *mini)
 {
 	int		fd;
+	int		dup_fd;
 	t_list	*tmp;
 
 	fd = 0;
+	dup_fd = dup(STDIN_FILENO);
 	tmp = mini->exc->redrc;
+	signal(SIGINT, handl_segint_child);
 	while (tmp)
 	{
 		if (tmp->wt == IN_F)
@@ -78,13 +81,14 @@ void	handle_redrc_and_heredoc(t_minishell *mini)
 		}
 		else if (tmp->wt == LMTR)
 		{
-			open_here_doc(mini, &fd);
+			open_here_doc(mini, tmp, &fd, dup_fd);
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 		}
 		tmp = tmp->next;
 	}
-	return ;
+	// if (tmp->wt == LMTR || )
+	return;
 }
 
 void	execute_one_command(t_minishell *mini)
@@ -97,12 +101,10 @@ void	execute_one_command(t_minishell *mini)
 	if (mini->exc && mini->exc->cmd_exec && mini->exc->cmd_exec[0][0] != '\0')
 	{
 		path = get_cmd_path(mini, mini->exc->cmd_exec[0]);
+		if (!path)
+			cmd_not_found(mini->exc->cmd_exec);
 		execve(path, mini->exc->cmd_exec, take_char_env(mini->env));
 	}
-	if (access((const char *)mini->filename, F_OK) == 0)
-		unlink((const char *)mini->filename);
-	*mini->ext_st = 127;
-	perror("minishell_exec_one");
 	return ;
 }
 
@@ -122,8 +124,6 @@ void	execute_command_with_nopipe(t_minishell *mini)
 	wait(mini->ext_st);
 	if (WIFEXITED(*mini->ext_st))
 		*mini->ext_st = WEXITSTATUS(*mini->ext_st);
-	if (access((const char *)mini->filename, F_OK) == 0)
-		unlink((const char *)mini->filename);
 	return ;
 }
 
@@ -138,10 +138,12 @@ void	execute_cmds(t_minishell *mini)
 	tmp = mini->exc;
 	// *mini->ext_st = 0;
 	if (tmp && tmp->next == NULL)
-		{
-			execute_command_with_nopipe(mini);
+	{
+		execute_command_with_nopipe(mini);
+		if (access((const char *)mini->filename, F_OK) == 0)
+			unlink((const char *)mini->filename);
 		return;
-		}
+	}
 	// old_in[0] = dup(STDIN_FILENO);
 	// old_out[1] = dup(STDOUT_FILENO);
 	// while (tmp)
