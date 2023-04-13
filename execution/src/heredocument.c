@@ -37,7 +37,6 @@ void	open_here_doc(t_minishell *mini, t_list *node, int *fd, int dupp)
 		line = readline("Minishell> ");
 		if (!line)
 			break;
-		printf("HEY\n");
 		if (ft_strncmp(line, node->pt, ft_strlen(node->pt) + 1) == 0)
 			break ;
 		if (node->acs == 1)

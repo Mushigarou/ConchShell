@@ -42,7 +42,7 @@ char	*get_cmd_path(t_minishell *mini, char *cmd)
 		tmp = tmp->next;
 	}
 	if (!path)
-		{perror("minishell:"); *mini->ext_st = 127; exit(127);}
+		{perror("minishell_get_cmd_path:"); *mini->ext_st = 127; exit(127);}
 	return (find_cmd(path, cmd, mini));
 }
 
