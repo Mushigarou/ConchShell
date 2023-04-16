@@ -14,6 +14,9 @@ char	**convert_env(t_list *env);
 // **	Returns path variable splitted
 char 	*get_cmd_path(t_minishell *mini, char *cmd);
 
-void	open_here_doc(t_minishell *mini, t_list *node, int *in_fd, int dup);
+void	open_here_doc(t_minishell *mini, t_exec *node, t_list *rdrc);
+
+void	heredoc_filename(t_exec **mini, int *heredoc_fd);
+
 
 #endif
