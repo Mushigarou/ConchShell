@@ -46,6 +46,19 @@ char	*get_cmd_path(t_minishell *mini, char *cmd)
 	return (find_cmd(path, cmd, mini));
 }
 
+void	close_file_descriptors(t_minishell *mini)
+{
+	int	i;
+
+	i = 0;
+	while (i < mini->fd_cnt)
+	{
+		close(mini->open_fds[i]);
+		i++;
+	}
+	return;
+}
+
 char	**convert_env(t_list *env)
 {
 	char **env_d;

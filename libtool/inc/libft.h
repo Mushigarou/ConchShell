@@ -35,7 +35,7 @@ typedef struct s_list
 {
 	char			*pt;
 	int				wt;
-	int				acs; // if acs= 0 Noexpand, else expand (t_list *redrc)
+	int				acs;
 	struct s_list	*next;
 }	t_list;
 
@@ -52,11 +52,11 @@ typedef struct s_exec
 typedef struct s_minishell
 {
 	int		*ext_st;
-	int		fd[2];
 	char	*line;
 	char	*prompt;
 	t_exec	*exc;
 	int		open_fds[OPEN_MAX];
+	int		fd_cnt; // fd count
 	t_list	*cmd;
 	t_list	*env;
 }	t_minishell;

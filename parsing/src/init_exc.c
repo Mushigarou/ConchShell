@@ -73,6 +73,8 @@ void	cmd_not_found(char **cm)
 	int	ext;
 	DIR	*dir;
 
+	if (!cm || !cm[0])
+		{printf("Minishell: command not found\n");exit(127);}
 	dir = opendir(cm[0]);
 	if (dir)
 	{
