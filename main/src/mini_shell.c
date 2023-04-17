@@ -25,11 +25,8 @@ void	handl_segint(int segnum)
 
 void	take_and_do_cmd(t_minishell *mini)
 {
-	// tokenization of input
 	take_cmd(mini);
-	// execution
-	execute_cmds(mini);
-	// exec_input(mini);
+	execute_pipeline(mini);
 	ft_lstclear(&mini->cmd);
 }
 

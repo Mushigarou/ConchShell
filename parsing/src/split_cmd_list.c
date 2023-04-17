@@ -70,7 +70,7 @@ t_list	**split_cmd_list(t_minishell *mini)
 	i = how_many_pipe(mini->cmd);
 	cmd = (t_list **)malloc(sizeof(t_list *) * (i + 1));
 	if (!cmd)
-		return(NULL);
+		return (NULL);
 	j = -1;
 	while (++j <= i)
 		cmd[j] = single_cmd(mini);
@@ -92,4 +92,3 @@ int	error(char *er, int ext_er)
 			strerror(errno), RED, er, WHITE);
 	return (ext_er);
 }
-

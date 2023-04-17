@@ -107,6 +107,6 @@ void	init_exc(t_minishell *mini);
 /*command not found*/
 void	cmd_not_found(char **cm);
 /*error printing*/
-int	    error(char *er, int ext_er);
+int		error(char *er, int ext_er);
 
 #endif

@@ -30,7 +30,6 @@
 # define YELLOW "\001\e[33;1;3m\002"
 # define GREEN "\001\e[32;3;1m\002"
 
-
 typedef struct s_list
 {
 	char			*pt;
@@ -56,7 +55,7 @@ typedef struct s_minishell
 	char	*prompt;
 	t_exec	*exc;
 	int		open_fds[OPEN_MAX];
-	int		fd_cnt; // fd count
+	int		fd_cnt;
 	t_list	*cmd;
 	t_list	*env;
 }	t_minishell;
