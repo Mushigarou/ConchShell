@@ -1,14 +1,25 @@
 #include "execution.h"
 
-void	open_pipes(t_exec *pipeline)
+void	open_pipes(t_minishell *mini, t_exec *pipeline)
 {
-	
-	if (!pipeline->next)
-		return ;
-	while (pipeline->next)
+	int	fd[2];
+	int	i;
+
+	i = 0;
+	pipeline->in = -1;
+	while (pipeline)
 	{
-		pipe((int [2]){pipeline->in, pipeline->out});
-		printf("in %d | out %d", pipeline->in, pipeline->out);
+		if (pipe(fd))
+			{perror("pipe");exit(1);}
+		mini->open_fds[mini->fd_cnt++] = fd[0];
+		mini->open_fds[mini->fd_cnt++] = fd[1];
+		if (pipeline->next)
+		{
+			pipeline->next->in = fd[0];
+			pipeline->out = fd[1];
+		}
+		// printf("in %d | out %d | i = %d\n", pipeline->in, pipeline->out, i);
+		i++;
 		pipeline = pipeline->next;
 	}
 	return ;

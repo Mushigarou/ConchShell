@@ -45,7 +45,7 @@ typedef struct s_exec
 	t_list			*redrc;
 	int				in;
 	int				out;
-	char			heredoc_filename[20];
+	char			heredoc_filename[25];
 	struct s_exec	*next;
 }	t_exec;
 

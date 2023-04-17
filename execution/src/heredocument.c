@@ -57,9 +57,6 @@ void	open_heredoc(t_minishell *mini, t_exec *cmd_list)
 
 	while (cmd_list)
 	{
-		cmd_list->in = -1;
-		cmd_list->out = -1;
-		ft_bzero(cmd_list->heredoc_filename, 20);
 		if (cmd_list->redrc)
 		{
 			tmp2 = cmd_list->redrc;

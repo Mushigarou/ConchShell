@@ -18,7 +18,7 @@ void	open_here_doc(t_minishell *mini, t_exec *node, t_list *rdrc);
 
 void	heredoc_filename(t_exec **mini);
 
-void	open_pipes(t_exec *pipeline);
+void	open_pipes(t_minishell *mini, t_exec *pipeline);
 
 void	close_file_descriptors(t_minishell *mini);
 

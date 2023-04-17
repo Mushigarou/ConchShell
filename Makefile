@@ -24,7 +24,8 @@ PARSE := 	parsing/src/check_redirection.c \
 
 EXEC :=  	execution/src/execution.c \
 			execution/src/utils.c \
-			execution/src/heredocument.c
+			execution/src/heredocument.c \
+			execution/src/redirections.c
 			
 
 SRC := $(MAIN) $(PARSE) $(EXEC)
