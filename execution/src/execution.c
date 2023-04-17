@@ -28,6 +28,7 @@ static void	init_var(t_minishell *mini, t_exec *pipeline)
 	mini->fd_cnt = 0;
 	while (pipeline)
 	{
+		pipeline->rdrct_err = 0;
 		pipeline->in = -1;
 		pipeline->out = -1;
 		ft_bzero(pipeline->heredoc_filename, 25);
@@ -64,7 +65,9 @@ void	execute_pipeline(t_minishell *mini)
 	tmp = mini->exc;
 	while (tmp)
 	{
-		pid = fork();
+		pid = -1;
+		if (!tmp->rdrct_err)
+			pid = fork();
 		if (pid == 0)
 			_execute_in_child(mini, tmp);
 		if (access(tmp->heredoc_filename, F_OK) == 0)

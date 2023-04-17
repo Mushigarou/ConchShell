@@ -85,8 +85,7 @@ void	close_file_descriptors(t_minishell *mini)
 	i = 0;
 	while (i < mini->fd_cnt)
 	{
-		if (close(mini->open_fds[i]) != 0)
-			perror("close");
+		close(mini->open_fds[i]);
 		i++;
 	}
 	return ;

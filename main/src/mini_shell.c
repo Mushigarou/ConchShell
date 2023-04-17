@@ -3,11 +3,7 @@
 void	handl_segint_child(int segnum)
 {
 	if (segnum == SIGINT)
-	{
-		write(1, "\n", 1);
-		g_ext_st = 130;
-		exit(g_ext_st);
-	}
+		exit(130);
 }
 
 void	handl_segint(int segnum)
