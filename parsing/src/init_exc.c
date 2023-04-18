@@ -38,6 +38,7 @@ void	take_exc_prt(t_exec **exc, t_list *cmd)
 	if (!new)
 		return ;
 	new->next = NULL;
+	new->rdrct_err = 0;
 	new->cmd_exec = NULL;
 	if (check_cmd(cmd))
 		new->cmd_exec = take_char_cmd(cmd);

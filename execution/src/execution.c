@@ -6,7 +6,7 @@ static void	_execute_command(t_minishell *mini, t_exec *cmd_to_exec)
 	char	*path;
 
 	path = NULL;
-	if (cmd_to_exec->cmd_exec && check_builtin(cmd_to_exec->cmd_exec[0]))
+	if (check_builtin(cmd_to_exec->cmd_exec[0]))
 		return (do_builtin(cmd_to_exec, mini));
 	if (cmd_to_exec->cmd_exec && cmd_to_exec->cmd_exec[0])
 		path = get_cmd_path(mini, cmd_to_exec->cmd_exec[0]);
@@ -32,8 +32,8 @@ static void	init_var(t_minishell *mini, t_exec *pipeline)
 	while (pipeline)
 	{
 		pipeline->rdrct_err = 0;
-		pipeline->in = -1;
-		pipeline->out = -1;
+		pipeline->in = -2;
+		pipeline->out = -2;
 		ft_bzero(pipeline->heredoc_filename, 25);
 		pipeline = pipeline->next;
 	}

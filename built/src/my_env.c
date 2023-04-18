@@ -2,7 +2,7 @@
 
 int	is_env(char *cmd)
 {
-	return (ft_strcmp(cmd, "env"));
+	return ((ft_strcmp(cmd, "env") == 0));
 }
 
 void	my_env(t_list *env)

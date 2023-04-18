@@ -2,7 +2,7 @@
 
 int	is_echo(char *cmd)
 {
-	return (ft_strcmp(cmd, "echo"));
+	return ((ft_strcmp(cmd, "echo") == 0));
 }
 
 int	check_echo_flg(char *flg)

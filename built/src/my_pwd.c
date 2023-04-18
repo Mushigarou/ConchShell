@@ -2,7 +2,7 @@
 
 int	is_pwd(char *cmd)
 {
-	return (ft_strcmp(cmd, "pwd"));
+	return ((ft_strcmp(cmd, "pwd") == 0));
 }
 
 void	my_pwd(t_list *env)

@@ -12,7 +12,7 @@ int	mtx_len(char **mx)
 
 int	is_exit(char *cmd)
 {
-	return (ft_strcmp(cmd, "exit"));
+	return ((ft_strcmp(cmd, "exit") == 0));
 }
 
 int	valid_arg(char *arg)

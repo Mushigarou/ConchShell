@@ -2,7 +2,7 @@
 
 int	is_cd(char *cmd)
 {
-	return (ft_strcmp(cmd, "cd"));
+	return ((ft_strcmp(cmd, "cd") == 0));
 }
 
 void	go_home(t_minishell *mini)

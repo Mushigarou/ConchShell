@@ -2,7 +2,7 @@
 
 int	is_export(char *cmd)
 {
-	return (ft_strcmp(cmd, "export"));
+	return ((ft_strcmp(cmd, "export") == 0));
 }
 
 void	print_export(t_minishell *mini)
@@ -17,8 +17,7 @@ void	print_export(t_minishell *mini)
 	while (tmp)
 	{
 		if (tmp->acs)
-			ft_printf("%sdeclare - x %s%s\n", STDOUT_FILENO, GREEN,
-				WHITE, tmp->pt);
+			ft_printf("declare - x %s\n", STDOUT_FILENO, tmp->pt);
 		tmp = tmp->next;
 	}
 	ft_lstclear(&exprt);

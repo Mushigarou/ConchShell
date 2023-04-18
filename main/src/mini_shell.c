@@ -22,8 +22,8 @@ void	handl_segint(int segnum)
 void	take_and_do_cmd(t_minishell *mini)
 {
 	take_cmd(mini);
-	if (!mini->exc->next && check_builtin(mini->exc->cmd_exec[0])
-		&& !should_not_fork(mini->exc->cmd_exec))
+	if ((check_builtin(mini->exc->cmd_exec[0])
+			&& !should_not_fork(mini->exc->cmd_exec)) && !mini->exc->next)
 	{
 		open_heredoc_and_redirections(mini, mini->exc);
 		if (!mini->exc->rdrct_err)
