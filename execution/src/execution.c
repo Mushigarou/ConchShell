@@ -15,11 +15,12 @@ static void	_execute_command(t_minishell *mini, t_exec *cmd_to_exec)
 }
 
 // **	Wait for child processes until they finish
-static void	wait_childs(t_minishell *mini)
+static int	wait_childs(t_minishell *mini)
 {
 	while (waitpid(-1, mini->ext_st, 0) != -1)
 		if (WIFEXITED(*mini->ext_st))
 			*mini->ext_st = WEXITSTATUS(*mini->ext_st);
+	return (*mini->ext_st);
 }
 
 // Initialize fd's variables to -1, which means normal STDIN / STDOUT
@@ -37,7 +38,7 @@ static void	init_var(t_minishell *mini, t_exec *pipeline)
 	return ;
 }
 
-static inline void	_execute_in_child(t_minishell *mini, t_exec *command)
+static void	_execute_in_child(t_minishell *mini, t_exec *command)
 {
 	if (command->in > 0)
 		if (dup2(command->in, STDIN_FILENO) < 0)
@@ -76,5 +77,5 @@ void	execute_pipeline(t_minishell *mini)
 		tmp = tmp->next;
 	}
 	close_file_descriptors(mini);
-	wait_childs(mini);
+	exit(wait_childs(mini));
 }
