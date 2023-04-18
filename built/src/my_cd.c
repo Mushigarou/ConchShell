@@ -1,18 +1,8 @@
 #include"../inc/built.h"
 
-int	is_cd(t_list *cmd)
+int	is_cd(char *cmd)
 {
-	t_list	*tmp;
-
-	tmp = cmd;
-	while (tmp)
-	{
-		if (tmp->wt == CMD)
-			if (!ft_strncmp(tmp->pt, "cd", 3))
-				return (1);
-		tmp = tmp->next;
-	}
-	return (0);
+	return (ft_strcmp(cmd, "cd"));
 }
 
 void	go_home(t_minishell *mini)
@@ -85,15 +75,11 @@ void	update_env(t_minishell *mini)
 	}
 }
 
-void	my_cd(t_list *cmd, t_minishell *mini)
+void	my_cd(t_exec *cmd, t_minishell *mini)
 {
-	char	**cm;
-
-	cm = take_char_cmd(cmd);
-	if (!cm[1])
+	if (!cmd->cmd_exec[1])
 		go_home(mini);
-	else if (chdir(cm[1]) < 0)
-		*mini->ext_st = error(cm[1], 1);
-	deallocate(cm);
+	else if (chdir(cmd->cmd_exec[1]) < 0)
+		*mini->ext_st = error(cmd->cmd_exec[1], 1);
 	update_env(mini);
 }

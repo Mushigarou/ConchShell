@@ -1,18 +1,8 @@
 #include"../inc/built.h"
 
-int	is_unset(t_list *cmd)
+int	is_unset(char *cmd)
 {
-	t_list	*tmp;
-
-	tmp = cmd;
-	while (tmp)
-	{
-		if (tmp->wt == CMD)
-			if (!ft_strncmp(tmp->pt, "unset", 5))
-				return (1);
-		tmp = tmp->next;
-	}
-	return (0);
+	return (ft_strcmp(cmd, "unset"));
 }
 
 int	check_unset_syntax(char *str, int *ext_st)
@@ -30,17 +20,15 @@ int	check_unset_syntax(char *str, int *ext_st)
 
 int	is_the_target(char *str, char *env)
 {
-	int	i;
+	char	*key;
 
-	i = 0;
-	while (env[i] != '=' && env[i] != '\0')
-	{
-		if (str[i] && (str[i] != env[i]))
-			return (0);
-		i++;
-	}
-	if ((env[i] == '=' || env[i] == '\0') && (str[i] == '\0'))
-		return (1);
+	if (ft_strchr(env, '='))
+		key = ft_substr(env, 0, ft_strchr(env, '=') - env);
+	else
+		key = ft_strdup(env);
+	if (!ft_strcmp(key, str))
+		return (free(key), 1);
+	free(key);
 	return (0);
 }
 
@@ -60,19 +48,19 @@ void	unset_from_env(char *str, t_minishell *mini)
 	while (tmp)
 	{
 		if (is_the_target(str, tmp->pt))
+		{
+			printf("-> %s\n", tmp->pt);
 			tmp->acs = 0;
+		}
 		tmp = tmp->next;
 	}
 }
 
-void	my_unset(t_list *cmd, t_minishell *mini)
+void	my_unset(t_exec *cmd, t_minishell *mini)
 {
-	char	**cm;
 	int		i;
 
-	cm = take_char_cmd(cmd);
 	i = 0;
-	while (cm[++i])
-		unset_from_env(cm[i], mini);
-	deallocate(cm);
+	while (cmd->cmd_exec[++i])
+		unset_from_env(cmd->cmd_exec[i], mini);
 }

@@ -1,18 +1,8 @@
 #include"../inc/built.h"
 
-int	is_export(t_list *cmd)
+int	is_export(char *cmd)
 {
-	t_list	*tmp;
-
-	tmp = cmd;
-	while (tmp)
-	{
-		if (tmp->wt == CMD)
-			if (!ft_strncmp(tmp->pt, "export", 7))
-				return (1);
-		tmp = tmp->next;
-	}
-	return (0);
+	return (ft_strcmp(cmd, "export"));
 }
 
 void	print_export(t_minishell *mini)
@@ -63,19 +53,16 @@ void	export_var(char *str, t_minishell *mini)
 		free(val);
 }
 
-void	my_export(t_list *cmd, t_minishell *mini)
+void	my_export(t_exec *cmd, t_minishell *mini)
 {
-	char	**cm;
 	int		i;
 
-	cm = take_char_cmd(cmd);
 	i = 0;
-	if (!cm[1])
+	if (!cmd->cmd_exec[1])
 		print_export(mini);
 	else
 	{
-		while (cm[++i])
-			export_var(cm[i], mini);
+		while (cmd->cmd_exec[++i])
+			export_var(cmd->cmd_exec[i], mini);
 	}
-	deallocate(cm);
 }

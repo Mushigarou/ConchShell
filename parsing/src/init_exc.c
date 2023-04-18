@@ -66,6 +66,7 @@ void	init_exc(t_minishell *mini)
 	while (cmd[++i])
 		take_exc_prt(&mini->exc, cmd[i]);
 	free(cmd);
+	ft_lstclear(&mini->cmd);
 }
 
 void	cmd_not_found(char **cm)

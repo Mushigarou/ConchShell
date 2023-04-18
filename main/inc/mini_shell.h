@@ -16,5 +16,6 @@ void	take_and_do_cmd(t_minishell *mini);
 void	handl_segint(int segnum);
 void	handl_segint_child(int segnum);
 char	*inisialise_prompt_2(void);
+void	free_exc(t_exec **lst);
 
 #endif

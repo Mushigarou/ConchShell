@@ -1,6 +1,5 @@
 #include "execution.h"
 
-
 // **	Returns a heredocument filename that doesn't exist yet
 static void	_heredoc_filename(t_exec **command)
 {
@@ -104,7 +103,7 @@ void	open_heredoc_and_redirections(t_minishell *mini, t_exec *pipeline)
 					_open_here_doc(mini, pipeline, tmp2);
 				}
 				else if (!pipeline->rdrct_err)
-					pipeline->rdrct_err = _handle_redirections(mini, tmp2, 
+					pipeline->rdrct_err = _handle_redirections(mini, tmp2,
 							&pipeline->in, &pipeline->out);
 				tmp2 = tmp2->next;
 			}

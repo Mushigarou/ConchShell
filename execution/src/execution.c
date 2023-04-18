@@ -6,6 +6,8 @@ static void	_execute_command(t_minishell *mini, t_exec *cmd_to_exec)
 	char	*path;
 
 	path = NULL;
+	if (cmd_to_exec->cmd_exec && check_builtin(cmd_to_exec->cmd_exec[0]))
+		return (do_builtin(cmd_to_exec, mini));
 	if (cmd_to_exec->cmd_exec && cmd_to_exec->cmd_exec[0])
 		path = get_cmd_path(mini, cmd_to_exec->cmd_exec[0]);
 	if (!path)

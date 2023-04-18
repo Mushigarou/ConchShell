@@ -3,10 +3,7 @@
 void	handl_segint_child(int segnum)
 {
 	if (segnum == SIGINT)
-	{
-		write(1, "\n", 1);
 		exit(130);
-	}
 }
 
 void	handl_segint(int segnum)
@@ -22,23 +19,28 @@ void	handl_segint(int segnum)
 	}
 }
 
-static void wait_childs(t_minishell *mini)
-{
-	while (waitpid(-1, mini->ext_st, 0) != -1)
-		if (WIFEXITED(*mini->ext_st))
-			*mini->ext_st = WEXITSTATUS(*mini->ext_st);
-}
 void	take_and_do_cmd(t_minishell *mini)
 {
 	take_cmd(mini);
-	if (!mini->exc->next || check_builtin(mini->exc->cmd_exec[0]))
-	if (fork() == 0)
+	if (!mini->exc->next && check_builtin(mini->exc->cmd_exec[0])
+		&& !should_not_fork(mini->exc->cmd_exec))
 	{
-		signal(SIGINT, handl_segint_child);
-		execute_pipeline(mini);
+		open_heredoc_and_redirections(mini, mini->exc);
+		if (!mini->exc->rdrct_err)
+			do_builtin(mini->exc, mini);
 	}
-	wait_childs(mini);
-	ft_lstclear(&mini->cmd);
+	else
+	{
+		if (fork() == 0)
+		{
+			signal(SIGINT, handl_segint_child);
+			execute_pipeline(mini);
+		}
+		while (waitpid(-1, mini->ext_st, 0) != -1)
+			if (WIFEXITED(*mini->ext_st))
+				*mini->ext_st = WEXITSTATUS(*mini->ext_st);
+	}
+	free_exc(&mini->exc);
 }
 
 void	mini_shell(t_minishell *mini)
