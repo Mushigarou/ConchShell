@@ -31,6 +31,7 @@ static void wait_childs(t_minishell *mini)
 void	take_and_do_cmd(t_minishell *mini)
 {
 	take_cmd(mini);
+	if (!mini->exc->next || check_builtin(mini->exc->cmd_exec[0]))
 	if (fork() == 0)
 	{
 		signal(SIGINT, handl_segint_child);
