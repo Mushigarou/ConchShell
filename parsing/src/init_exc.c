@@ -85,6 +85,5 @@ void	cmd_not_found(char **cm)
 	}
 	else
 		ext = error(cm[0], 127);
-	deallocate(cm);
 	exit(ext);
 }

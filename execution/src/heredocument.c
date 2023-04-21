@@ -64,7 +64,7 @@ static inline int	_handle_redirections(t_minishell *mini, t_list *token,
 	{
 		*in = open(tmp->pt, O_RDONLY);
 		if (*in == -1)
-			return (*mini->ext_st = error("Minishell_redrc1", 1), g_ext_st);
+			return (*mini->ext_st = error(tmp->pt, 1), g_ext_st);
 		mini->open_fds[mini->fd_cnt++] = *in;
 	}
 	else if (tmp->wt == AP_F || tmp->wt == TR_F)
@@ -75,7 +75,7 @@ static inline int	_handle_redirections(t_minishell *mini, t_list *token,
 			*out = open(tmp->pt, O_CREAT | O_APPEND | O_RDONLY | O_WRONLY,
 					0644);
 		if (*out == -1)
-			return (*mini->ext_st = error("Minishell_redrc2", 1), g_ext_st);
+			return (*mini->ext_st = error(tmp->pt, 1), g_ext_st);
 		mini->open_fds[mini->fd_cnt++] = *out;
 	}
 	return (0);

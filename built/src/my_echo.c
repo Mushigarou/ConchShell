@@ -12,7 +12,7 @@ int	check_echo_flg(char *flg)
 	i = 1;
 	while (flg[i] == 'n')
 		i++;
-	if (flg[i] == '\0' && i > 1)
+	if (flg[0] == '-' && flg[i] == '\0' && i > 1)
 		return (1);
 	else
 		return (0);

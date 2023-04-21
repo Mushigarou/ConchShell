@@ -2,6 +2,8 @@
 
 int	check_builtin(char *cmd)
 {
+	if (!cmd)
+		return (0);
 	if (is_cd(cmd) || is_echo(cmd) || is_env(cmd) || is_exit(cmd)
 		|| is_unset(cmd) || is_export(cmd) || is_pwd(cmd))
 		return (1);
