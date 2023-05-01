@@ -2,6 +2,7 @@
 # define PARSING_H
 
 # include"../../libtool/inc/libft.h"
+# include"../../main/inc/mini_shell.h"
 
 # define HEREDOC 1
 # define LMTR 2
@@ -108,5 +109,7 @@ void	init_exc(t_minishell *mini);
 void	cmd_not_found(char **cm);
 /*error printing*/
 int		error(char *er, int ext_er);
+/*open the heredoc read it and stor it for later*/
+void	take_heredoc(t_minishell *mini);
 
 #endif

@@ -44,9 +44,9 @@ void	take_and_do_cmd(t_minishell *mini)
 			signal(SIGQUIT, handl_segint_child);
 			execute_pipeline(mini);
 		}
-		while (waitpid(-1, mini->ext_st, 0) != -1)
-			if (WIFEXITED(*mini->ext_st))
-				*mini->ext_st = WEXITSTATUS(*mini->ext_st);
+		waitpid(-1, mini->ext_st, 0);
+		if (WIFEXITED(*mini->ext_st))
+			*mini->ext_st = WEXITSTATUS(*mini->ext_st);
 	}
 	free_exc(&mini->exc);
 }
