@@ -44,8 +44,6 @@ char	*get_cmd_path(t_minishell *mini, char *cmd)
 		}
 		tmp = tmp->next;
 	}
-	if (!path)
-		error("minishell_get_cmd_path", 127);
 	return (find_cmd(path, cmd));
 }
 

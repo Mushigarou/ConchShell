@@ -45,7 +45,6 @@ typedef struct s_exec
 	int				in;
 	int				out;
 	int				rdrct_err;
-	char			heredoc_filename[25];
 	struct s_exec	*next;
 }	t_exec;
 
