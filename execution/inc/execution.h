@@ -23,6 +23,6 @@ void	close_file_descriptors(t_minishell *mini);
 	Opens redirections '<' '>' '>>', and heredoc '<<' which is stored
 	in a tmp file for later use in execute_pipeline()
 */
-void	open_heredoc_and_redirections(t_minishell *mini, t_exec *cmd_list);
+void	open_redirections(t_minishell *mini, t_exec *cmd_list);
 
 #endif

@@ -85,7 +85,7 @@ static inline int	_handle_redirections(t_minishell *mini, t_list *token,
 	Opens redirections '<' '>' '>>', and heredoc '<<' which is stored 
 	in a tmp file for later use in execute_pipeline()
 */
-void	open_heredoc_and_redirections(t_minishell *mini, t_exec *pipeline)
+void	open_redirections(t_minishell *mini, t_exec *pipeline)
 {
 	t_list	*tmp2;
 

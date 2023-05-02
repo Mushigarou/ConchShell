@@ -71,7 +71,7 @@ void	execute_pipeline(t_minishell *mini)
 	init_var(mini, mini->exc);
 	if (mini->exc->next)
 		open_pipes(mini, mini->exc);
-	open_heredoc_and_redirections(mini, mini->exc);
+	open_redirections(mini, mini->exc);
 	tmp = mini->exc;
 	while (tmp)
 	{
