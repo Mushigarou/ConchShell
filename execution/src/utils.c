@@ -91,7 +91,7 @@ void	close_file_descriptors(t_minishell *mini)
 
 void	execute_all_commands(t_minishell *mini, t_exec *tmp, int *pid)
 {
-    while (tmp)
+	while (tmp)
 	{
 		*pid = -1;
 		if (!tmp->rdrct_err)
