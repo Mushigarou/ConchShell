@@ -19,13 +19,8 @@ static void	_execute_command(t_minishell *mini, t_exec *cmd_to_exec)
 }
 
 // **	Wait for child processes until they finish
-static int	wait_childs(t_minishell *mini)
+static int	wait_childs(t_minishell *mini, int pid)
 {
-	int	pid;
-
-	pid = waitpid(-1, mini->ext_st, 0);
-	if (WIFEXITED(*mini->ext_st))
-		*mini->ext_st = WEXITSTATUS(*mini->ext_st);
 	if (*mini->ext_st == 11)
 		*mini->ext_st = (ft_printf("%d segmentation fault\n", 2, pid), 139);
 	while (1)
@@ -48,7 +43,7 @@ static void	init_var(t_minishell *mini, t_exec *pipeline)
 	return ;
 }
 
-static void	_execute_in_child(t_minishell *mini, t_exec *command)
+void	_execute_in_child(t_minishell *mini, t_exec *command)
 {
 	if (command->in > 0)
 		if (dup2(command->in, STDIN_FILENO) < 0)
@@ -63,28 +58,17 @@ static void	_execute_in_child(t_minishell *mini, t_exec *command)
 // Opens heredoc, opens redirections then executes pipeline
 void	execute_pipeline(t_minishell *mini)
 {
-	t_exec	*tmp;
 	pid_t	pid;
 
-	pid = 0;
+	pid = -1;
 	if (!mini || !mini->exc)
 		return ;
 	init_var(mini, mini->exc);
 	if (mini->exc->next)
 		open_pipes(mini, mini->exc);
 	open_redirections(mini, mini->exc);
-	tmp = mini->exc;
-	while (tmp)
-	{
-		pid = -1;
-		if (!tmp->rdrct_err)
-			pid = fork();
-		if (pid == 0)
-			_execute_in_child(mini, tmp);
-		else if (pid == -1)
-			exit(error("pipe", 1));
-		tmp = tmp->next;
-	}
+	execute_all_commands(mini, mini->exc, &pid);
 	close_file_descriptors(mini);
-	exit(wait_childs(mini));
+	wait_childs(mini, pid);
+	exit(*mini->ext_st);
 }

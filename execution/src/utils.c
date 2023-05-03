@@ -88,3 +88,29 @@ void	close_file_descriptors(t_minishell *mini)
 	}
 	return ;
 }
+
+void	execute_all_commands(t_minishell *mini, t_exec *tmp, int *pid)
+{
+    while (tmp)
+	{
+		*pid = -1;
+		if (!tmp->rdrct_err)
+			*pid = fork();
+		else
+		{
+			tmp = tmp->next;
+			continue ;
+		}
+		if (*pid == 0)
+			_execute_in_child(mini, tmp);
+		else if (*pid == -1)
+			exit(error("fork", 1));
+		tmp = tmp->next;
+	}
+	if (*pid != -1)
+	{		
+		waitpid(*pid, mini->ext_st, 0);
+		if (WIFEXITED(*mini->ext_st))
+			*mini->ext_st = WEXITSTATUS(*mini->ext_st);
+	}
+}

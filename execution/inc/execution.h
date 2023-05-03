@@ -25,4 +25,9 @@ void	close_file_descriptors(t_minishell *mini);
 */
 void	open_redirections(t_minishell *mini, t_exec *cmd_list);
 
+// **	Execute commands
+void    execute_all_commands(t_minishell *mini, t_exec *tmp, int *pid);
+
+// **	dup FD's and Runs a command in child process 
+void	_execute_in_child(t_minishell *mini, t_exec *command);
 #endif
