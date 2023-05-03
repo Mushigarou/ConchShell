@@ -61,7 +61,7 @@ void	open_pipes(t_minishell *mini, t_exec *pipeline)
 	while (pipeline)
 	{
 		if (pipe(fd))
-			error("pipe", 1);
+			exit(error("pipe", 1));
 		mini->open_fds[mini->fd_cnt++] = fd[0];
 		mini->open_fds[mini->fd_cnt++] = fd[1];
 		if (pipeline->next)
