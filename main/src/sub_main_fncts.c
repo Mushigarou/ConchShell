@@ -5,6 +5,7 @@ void	out(t_minishell *mini)
 	ft_lstclear(&mini->env);
 	free(mini->prompt);
 	free(mini->line);
+	rl_clear_history();
 	ft_printf("exit\n", 1);
 	exit(*mini->ext_st / 255);
 }
@@ -54,7 +55,7 @@ char	*inisialise_prompt(void)
 				ft_strjoin(ft_strdup(cd + i + 1),
 					ft_strjoin(ft_strdup("❯"),
 						ft_strjoin(ft_strdup("❨"),
-							ft_strjoin(ft_itoa(g_ext_st / 256),
+							ft_strjoin(ft_itoa(g_ext_st),
 								ft_strdup("❩ $➣ "))))));
 	}
 	return (ttl);
@@ -63,6 +64,7 @@ char	*inisialise_prompt(void)
 void	take_cmd(t_minishell *mini)
 {
 	mini->cmd = NULL;
+	mini->exc = NULL;
 	split_cmd_line_by_space(mini);
 	split_by_pp_and_rdrct(mini);
 	identify_special_charcters(mini);
@@ -73,4 +75,23 @@ void	take_cmd(t_minishell *mini)
 	identify_flag(mini);
 	identify_arg(mini);
 	extract_wild_card(mini);
+	init_exc(mini);
+	take_heredoc(mini);
+}
+
+void	free_exc(t_exec **lst)
+{
+	t_exec	*tmp;
+
+	if (!lst || !*lst)
+		return ;
+	while (lst && *lst)
+	{
+		tmp = (*lst)->next;
+		if ((*lst)->cmd_exec)
+			deallocate((*lst)->cmd_exec);
+		ft_lstclear(&(*lst)->redrc);
+		free(*lst);
+		*lst = tmp;
+	}
 }

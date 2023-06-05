@@ -38,12 +38,24 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_exec
+{
+	char			**cmd_exec;
+	t_list			*redrc;
+	int				in;
+	int				out;
+	int				rdrct_err;
+	struct s_exec	*next;
+}	t_exec;
+
 typedef struct s_minishell
 {
 	int		*ext_st;
-	int		fd[2];
 	char	*line;
 	char	*prompt;
+	t_exec	*exc;
+	int		open_fds[OPEN_MAX];
+	int		fd_cnt;
 	t_list	*cmd;
 	t_list	*env;
 }	t_minishell;

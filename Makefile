@@ -1,82 +1,105 @@
-FLAG = -Wall -Wextra -Werror 
+NAME := minishell
 
-LDFLAGS = /usr/lib/x86_64-linux-gnu/libreadline.a
+CFLAGS := -Wall -Wextra -Werror
 
-MN_H = main/inc/mini_shell.h
+READLINE = $(shell brew --prefix readline)
 
-RM = rm -rf
+READLINE_LIB :=  $(patsubst %, -lreadline -L%/lib, $(READLINE))
 
-NAME = minishell
+READLINE_HEADER := $(patsubst %, -I%/include, $(READLINE))
 
-M_F = mini_shell.c\
-		sub_main_fncts.c\
+LIBTOOL := libtool/libft.a
 
-P_F = check_redirection.c\
-		check_syntax.c\
-		take_dollar.c\
-		take_env.c\
-		split_by_pp_and_rdrct.c\
-		split_by_space.c\
-		lexer.c\
-		remove_quotes.c\
-		wild_card.c\
+RM := rm -rf
 
-E_F =   convert_env_list_to_char.c\
-			execute_all.c\
-			get_needed_info.c\
-			take_cmd_and_prts.c\
-			take_cmd_by_cmd.c\
-			take_cmd_path.c\
-			take_rdrct.c\
+MAIN :=		main/src/mini_shell.c \
+			main/src/sub_main_fncts.c \
 
-B_F = check_built.c\
-		my_echo.c\
-		my_cd.c\
-		my_pwd.c\
-		my_env.c\
-		my_exit.c\
-		my_unset.c\
-		my_export.c\
-		export_sub_fncts.c\
-		export_sub_fncts_2.c\
+PARSE := 	parsing/src/check_redirection.c \
+			parsing/src/check_syntax.c \
+			parsing/src/init_exc.c \
+			parsing/src/lexer.c \
+			parsing/src/remove_quotes.c \
+			parsing/src/split_by_pp_and_rdrct.c \
+			parsing/src/split_by_space.c \
+			parsing/src/split_cmd_list.c \
+			parsing/src/take_char_cmd.c \
+			parsing/src/take_dollar.c \
+			parsing/src/take_env.c \
+			parsing/src/wild_card.c \
+			parsing/src/read_heredoc.c
 
-O_D = obj
+EXEC :=  	execution/src/execution.c \
+			execution/src/utils.c \
+			execution/src/heredocument.c \
 
-M_D = main/src
+BLTIN :=	built/src/check_built.c\
+			built/src/export_sub_fncts.c\
+			built/src/export_sub_fncts_2.c\
+			built/src/my_cd.c\
+			built/src/my_echo.c\
+			built/src/my_env.c\
+			built/src/my_exit.c\
+			built/src/my_export.c\
+			built/src/my_pwd.c\
+			built/src/my_unset.c\
 
-P_D = parsing/src
+SRC := $(MAIN) $(PARSE) $(EXEC) $(BLTIN)
 
-E_D = execution/src
+OBJDIR := obj
 
-B_D = built/src
+OBJ := $(patsubst %, $(OBJDIR)/%, $(SRC:.c=.o))
 
-O_M = $(addprefix $(O_D)/,$(M_F:.c=.o))
+HEADERS 	:=	built/inc/built.h \
+				execution/inc/execution.h \
+				parsing/inc/parsing.h \
+				main/inc/mini_shell.h
 
-O_P = $(addprefix $(O_D)/,$(P_F:.c=.o))
+INC_HEADERS :=	-Ibuilt/inc \
+				-Iexecution/inc \
+				-Iparsing/inc \
+				-Imain/inc \
+				-Ilibtool/inc \
+				$(READLINE_HEADER)
 
-O_E = $(addprefix $(O_D)/,$(E_F:.c=.o))
+all : $(NAME)
 
-O_B = $(addprefix $(O_D)/,$(B_F:.c=.o))
+# readline is keg-only, which means it was not symlinked into /Users/$USER/.brew,
+# because macOS provides BSD libedit.
 
-M_S = $(addprefix $(M_D)/,$(M_F))
+# For compilers to find readline you may need to set:
+#   "-L/Users/$USER/.brew/opt/readline/lib"
+#   "-I/Users/$USER/.brew/opt/readline/include"
 
-P_S = $(addprefix $(P_D)/,$(P_F))
+$(NAME): $(LIBTOOL) $(OBJ) 
+	cc $(CFLAGS) $(OBJ) -o $@ $(READLINE_LIB) $(LIBTOOL)
+	printf "\r\033[0;33mMINISHELL is ready to lunch enjoy 😉\033[0m\n"
 
-E_S = $(addprefix $(E_D)/,$(E_F))
+$(OBJDIR)/%.o : %.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC_HEADERS)
 
-B_S = $(addprefix $(B_D)/,$(B_F))
+$(LIBTOOL) :
+	@printf "\r\033[0;33m⏳ libtool is compiling ...\033[0m"
+	@make -C libtool
 
-PRS_H = parsing/inc/parsing.h
+clean : 
+	@printf "\r\033[0;33mclearing object files 🚮🗑️ ...\033[0m"
+	@make -C libtool clean
+	$(RM) $(OBJDIR)
 
-EXC_H = execution/inc/execution.h
+fclean : clean
+	@printf "\r\033[0;33mYOU DELETED MY MINISHELL 😱 YOU !*#^&# 😡🤬\033[0m\n"
+	@make -C libtool fclean
+	$(RM) $(NAME)
 
-BLT_H = built/inc/built.h
+re : fclean all
 
-LIBTOOL = libtool/libft.a
+.PHONY: all fclean clean re
 
-all: start $(O_D) $(NAME)
+.SILENT: all clean fclean re $(NAME) $(LIBTOOL) img
 
-start:
+img:
 	clear
 	printf "\r\n"
 	echo "       	   :~-._                                                 _.-~:       "
@@ -111,47 +134,4 @@ start:
 	echo "\033[0;31m              ▒▓▒▒0   ▒▒   ▓▒█1 0▒   ▒ v▒▓▒ ▒ ▒  ▒▒   ▓▒█░░ ▒▓ ░▒▓░    \033[0m"
 	echo "\033[0;31m              1 0▒1    ▒   ▒▒ 2  ?   1 h░▒░ T :   ▒   1▒ 0  0▒ d ▒r    \033[0m"
 	echo "\033[0;31m              0 J ;    K   ▒   X !   &  1!1 ; |   3   L     10   Q     \033[0m"
-	echo "\033[0;31m                  1        1  0      /    0           ^  Z   1         \033[0m\n"                                             
-
-$(O_D):
-	mkdir $@
-
-$(NAME): $(O_M) $(O_P) $(O_E) $(O_B) $(LIBTOOL)
-	cc $(FLAG) $^ -lreadline -L /Users/faksouss/.brew/opt/readline/lib -o $@
-	printf "\r\033[0;33mMINISHELL is ready to lunch enjoy 😉\033[0m\n"
-
-$(LIBTOOL):
-	@printf "\r\033[0;33m⏳ libtool is compiling ...\033[0m"
-	@make -C libtool
-
-$(O_D)/%.o: $(M_D)/%.c $(MN_H)
-	@printf "\r\033[0;33m⏳ main is compiling ...\033[0m"
-	@cc $(FLAG) -c -I /Users/faksouss/.brew/opt/readline/include $< -o $@
-
-$(O_D)/%.o: $(P_D)/%.c $(PRS_H)
-	@printf "\r\033[0;33m⏳ parsing is compiling ...\033[0m"
-	@cc $(FLAG) -c $< -o $@
-
-$(O_D)/%.o: $(E_D)/%.c $(EXC_H)
-	@printf "\r\033[0;33m⏳ execution is compiling ...\033[0m"
-	@cc $(FLAG) -c $< -o $@
-
-$(O_D)/%.o: $(B_D)/%.c $(BLT_H)
-	@printf "\r\033[0;33m⏳ builtin is compiling ...\033[0m"
-	@cc $(FLAG) -c $< -o $@
-
-clean: 
-	@printf "\r\033[0;33mclearing object files 🚮🗑️ ...\033[0m"
-	@make -C libtool clean
-	$(RM) $(O_D)
-
-fclean: clean
-	@printf "\r\033[0;33mYOU DELETED MY MINISHELL 😱 YOU !*#^&# 😡🤬\033[0m\n"
-	@make -C libtool fclean
-	$(RM) $(NAME)
-
-re: fclean all
-
-.PHONY: all fclean clean re
-
-.SILENT: all clean fclean re $(NAME) $(O_D) $(LIBTOOL) start
+	echo "\033[0;31m                  1        1  0      /    0           ^  Z   1         \033[0m\n"          

@@ -1,18 +1,8 @@
 #include"../inc/built.h"
 
-int	is_pwd(t_list *cmd)
+int	is_pwd(char *cmd)
 {
-	t_list	*tmp;
-
-	tmp = cmd;
-	while (tmp)
-	{
-		if (tmp->wt == CMD)
-			if (!ft_strncmp(tmp->pt, "pwd", 4))
-				return (1);
-		tmp = tmp->next;
-	}
-	return (0);
+	return ((ft_strcmp(cmd, "pwd") == 0));
 }
 
 void	my_pwd(t_list *env)

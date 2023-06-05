@@ -1,12 +1,13 @@
-#include"../inc/mini_shell.h"
+#include "mini_shell.h"
 
 void	handl_segint_child(int segnum)
 {
 	if (segnum == SIGINT)
+		exit(130);
+	else if (segnum == SIGQUIT)
 	{
-		write(1, "\n", 1);
-		g_ext_st = 130;
-		exit(g_ext_st);
+		ft_printf("Quit\n", 2);
+		exit(131);
 	}
 }
 
@@ -21,18 +22,38 @@ void	handl_segint(int segnum)
 			rl_redisplay();
 		g_ext_st = 130;
 	}
+	else if (segnum == SIGQUIT)
+		rl_redisplay();
 }
 
 void	take_and_do_cmd(t_minishell *mini)
 {
 	take_cmd(mini);
-	split_and_execute_cmd(mini);
-	ft_lstclear(&mini->cmd);
+	if (mini->exc->cmd_exec && (check_builtin(mini->exc->cmd_exec[0])
+			&& !should_not_fork(mini->exc->cmd_exec)) && !mini->exc->next)
+	{
+		open_redirections(mini, mini->exc);
+		if (!mini->exc->rdrct_err)
+			do_builtin(mini->exc, mini);
+	}
+	else
+	{
+		if (fork() == 0)
+		{
+			signal(SIGINT, handl_segint_child);
+			signal(SIGQUIT, handl_segint_child);
+			execute_pipeline(mini);
+		}
+		waitpid(-1, mini->ext_st, 0);
+		if (WIFEXITED(*mini->ext_st))
+			*mini->ext_st = WEXITSTATUS(*mini->ext_st);
+	}
+	free_exc(&mini->exc);
 }
 
 void	mini_shell(t_minishell *mini)
 {
-	mini->prompt = inisialise_prompt_2();
+	mini->prompt = inisialise_prompt();
 	mini->line = readline(mini->prompt);
 	if (!mini->line)
 		out(mini);
@@ -40,7 +61,7 @@ void	mini_shell(t_minishell *mini)
 	if (!empty_line(mini->line))
 		add_history(mini->line);
 	if (check_syntax(mini->line) == 258)
-		*mini->ext_st = error(NULL, 258);
+			*mini->ext_st = error(NULL, 258);
 	else if (!empty_line(mini->line))
 		take_and_do_cmd(mini);
 	free(mini->line);
@@ -48,7 +69,7 @@ void	mini_shell(t_minishell *mini)
 
 int	main(int ac, char **av, char **en)
 {
-	t_minishell			mini;
+	t_minishell	mini;
 
 	(void)ac;
 	(void)av;
@@ -59,8 +80,8 @@ int	main(int ac, char **av, char **en)
 	}
 	mini.env = take_env(en);
 	mini.ext_st = &g_ext_st;
-	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, handl_segint);
+	signal(SIGQUIT, handl_segint);
 	while (1)
 		mini_shell(&mini);
 }

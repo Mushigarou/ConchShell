@@ -1,18 +1,8 @@
 #include"../inc/built.h"
 
-int	is_env(t_list *cmd)
+int	is_env(char *cmd)
 {
-	t_list	*tmp;
-
-	tmp = cmd;
-	while (tmp)
-	{
-		if (tmp->wt == CMD)
-			if (!ft_strncmp(tmp->pt, "env", 4))
-				return (1);
-		tmp = tmp->next;
-	}
-	return (0);
+	return ((ft_strcmp(cmd, "env") == 0));
 }
 
 void	my_env(t_list *env)
