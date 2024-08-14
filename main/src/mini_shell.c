@@ -1,5 +1,7 @@
 #include "mini_shell.h"
 
+int		g_ext_st;
+
 void	handl_segint_child(int segnum)
 {
 	if (segnum == SIGINT)
