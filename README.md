@@ -1,4 +1,4 @@
-# Mini Shell (As Beautiful as a Shell)
+# ConchShell (As Beautiful as a Shell)
 
 ## Navigation
 
@@ -19,7 +19,7 @@
     1. [Path Resolution](#path-resolution)
     1. [Pipe Handling](#pipe-handling)
     1. [File Descriptor Management](#file-descriptor-management)
-1. [Author & Final mark](#author--final-mark)
+1. [Authors](#authors)
 
 ## Introduction
 
@@ -49,9 +49,9 @@ $> make docker
 
 
 ```bash
-$> git clone 'git@github.com:jaguar-ks/MINI_SHELL.git'
-$> cd MINI_SHELL
-# ***`MacOS`*** : make sure you have the ***`readline`*** library installed (https://github.com/kube/42homebrew)
+$> git clone 'git@github.com:Mushigarou/ConchShell.git'
+$> cd ConchShell
+# ***`MacOS`*** : make sure you have the ***`readline`*** library installed
 $> brew install readline
 # ***`Debian`*** : make sure you have the ***`libreadline-dev && pkg-config`*** packages installed
 $> apt update && apt install -y pkg-config
@@ -208,8 +208,6 @@ The execution part of the minishell project handles the running of parsed comman
 
 This process ensures that commands are executed correctly, handling built-ins, external commands, redirections, and pipelines with proper resource management.
 
-## Author & Final mark
+## Authors
 
-This project was developed and validated by [`0xJ4GU4R`](https://github.com/jaguar-ks) and [`LeakedByteBuster`](https://github.com/LeakedByteBuster). With a final mark of:
-
-![final_mark](./mark.png)
+Built by [`0xJ4GU4R`](https://github.com/jaguar-ks) and [`Mushigarou`](https://github.com/Mushigarou).
